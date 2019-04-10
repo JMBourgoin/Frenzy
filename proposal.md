@@ -11,4 +11,14 @@ The timer gradually accelerates as the game progresses.  A player loses a life i
 
 ### Funtionality & MVP
 With this Frenzic clone, users will be able to:
-- [ ]
+- [ ] start, pause, and restart the game.
+- [ ] select and place the active pie-wedges into a fitting circle.
+- [ ] clear circles containing a full (6) collection of pie-wedges.
+- [ ] accrue points for cleared pies and additional points for clearing pies of the same color.
+- [ ] store their initials and highscores into the highscore library.
+
+### Wireframes
+
+
+
+
