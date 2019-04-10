@@ -18,7 +18,7 @@ With this Frenzic clone, users will be able to:
 - [ ] store their initials and highscores into the highscore library.
 
 ### Wireframes
-![Wireframes](asset1.png)
+![Wireframes](wireframe.png)
 
 
 
