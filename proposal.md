@@ -1,25 +1,25 @@
 # Javascript Project Proposal: Iconfactory's FRENZIC
 ***
 ### Background
-Iconfactory's Frenzic is a high pressure puzzle game that pits you against time. A player is challenged to fill 5 different empty circles with randomly colored pie-wedges before their time runs out.
+Iconfactory's Frenzic is a high pressure puzzle game that pits you, the user, against the fleeting nature of time. A player is challenged to fill 5 different empty "pies" with randomly colored/positioned pie-wedges before their time runs out.
 
-Each circle is cleared and points are scored when a circle has been entirely filled with a successful collection of wedges (6 pie-slices each).  
+Each pie is cleared and points scored when a pie has been entirely filled with a successful collection of wedges (6 pie-slices each).  
 
-Circles filled with all like-colored wedges score more points.  
+Pies filled with all like-colored wedges score more points.  
 
-The timer gradually accelerates as the game progresses.  A player loses a life if the timer runs out before successfully placing the current wedge.
+The timer gradually accelerates as the game progresses along.  A player loses a life if the timer runs out before successfully placing the current wedge.
 
 ### Funtionality & MVP
 With this Frenzic clone, users will be able to:
 - [ ] start, pause, and restart the game.
-- [ ] select and place the active pie-wedges into a fitting circle.
-- [ ] clear circles containing a full (6) collection of pie-wedges.
+- [ ] select and place the active pie-wedges into a fitting pie.
+- [ ] clear pies containing a full (6) collection of pie-wedges.
 - [ ] accrue points for cleared pies and additional points for clearing pies of the same color.
 - [ ] store their initials and highscores into the highscore library.
 
 ### Wireframes
 
-This app will be a single screen with the game "board" hosting all of the in-game controls.  Nav buttons to the apps github repo, my personal LinkedIn and an about me modal will be built into a header component above the main game board container.  To the right of the game board (possibly in the header along with the other links) will be the initialization controls to start the game and access the highscore library.
+This game will be a single screen application with the game "board" hosting all of the in-game controls.  Nav buttons to the apps github repo, my personal LinkedIn and an about-me modal will be built into a header component above the main game board container.  To the right of the game board (possibly in the header along with the other links) will be the initialization controls to start the game and access the highscore library.
 
 
 ![Wireframes](wireframe.png)
@@ -35,13 +35,13 @@ This app will be a single screen with the game "board" hosting all of the in-gam
 
 #### File / component structure:
 
-board.js: will render all of the static components as well render all of the logical components (pies(6), center_pie, score_component, lives_left_component, pie-wedges, timer_ring)
+board.js: will render all of the static components as well as render all of the logical components (pies(6), center_pie, score_component, lives_left_component, pie-wedges, timer_ring)
 
-pies.js will handle all of the logic for each pie-container.
-center.js will handle all of the logic for generating the random pie-wedges.
-score.js will handle all of the logic for keeping track of the score.
-lives.js will handle all of the logic for keeping track of the length of the game and the "game-over" functionality.
-timer.js will handle the timer logic and the gradual decrement of time over the length of a game-session.
+pies.js will handle all of the logic for each pie-container.<br>
+center.js will handle all of the logic for generating the random pie-wedges.<br>
+score.js will handle all of the logic for keeping track of the score.<br>
+lives.js will handle all of the logic for keeping track of the length of the game and the "game-over" functionality.<br>
+timer.js will handle the timer logic and the gradual decrement of time over the length of a game-session.<br>
 
 ### Implementation Timeline
 
