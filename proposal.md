@@ -55,18 +55,24 @@ timer.js will handle the timer logic and the gradual decrement of time over the 
   • render timer animation (x amount of seconds = each cell of timer circle to become visible)<br>
   
 #### Day 2:
-  • Working center pie (random wedges) logic.
-  • Pie container working and able to receive pie wedges, account for total wedges / wedge-position filled and clear when all positons have been taken.  Disallows invalid wedge-positions to be taken.
-  • Click (pies) event handling
+  • Working center pie (random wedges) logic.<br>
+  • Pie container working and able to receive pie wedges, account for total wedges / wedge-position filled and clear when all positons have been taken.  Disallows invalid wedge-positions to be taken.<br>
+  • Click (pies) event handling<br>
 
   
 #### Day 3:
-  • Score component tracks points for completed pies and (more) points for completed pies of the same color.
-  • Lives component tracks lives remaining and initiates a game-over sequence when the lives counter hits 0.
+  • Score component tracks points for completed pies and (more) points for completed pies of the same color.<br>
+  • Lives component tracks lives remaining and initiates a game-over sequence when the lives counter hits 0.<br>
   
 #### Day 4: 
-  • Enhance graphic styling (pie wedges, css)
-  • Build highscore DB and frontend 
+  • Enhance graphic styling (pie wedges, css)<br>
+  • Build highscore DB and frontend<br>
+  
+### Bonus Features:
+
+- [ ] sound effects.
+- [ ] animated actions: pie clear, wedge placement.
+- [ ] bonus elements: 2X score token, time-slow token, clear-all-pies token.
 
 
 
