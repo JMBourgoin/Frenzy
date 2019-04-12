@@ -1,23 +1,15 @@
+import Center from "./center";
+
 class Timer {
     constructor () {
+        this.center = new Center(388, 410);
         this.canvas = document.getElementById("myCanvas");
         this.ctx = this.canvas.getContext("2d");
-        this.gradient = this.ctx.createLinearGradient(20, 0, 220, 0);
-        this.gradient.addColorStop(0, 'green');
-        this.gradient.addColorStop(.5, 'yellow');
-        this.gradient.addColorStop(1, 'red');
         this.render = this.render.bind(this);
         this.draw = this.draw.bind(this);
-        this.start = this.start.bind(this);
-        this.x = .05;
-    }
+        this.x = .01;
+        }
 
-
-    start(){
-            setInterval(this.draw, 50);
-
-    }
-    
     draw(){
         this.ctx.clearRect(0, 0, 800, 800);
         let color = '';
@@ -33,7 +25,7 @@ class Timer {
         } else {
             this.x = 0;
         }
-        this.x += .01;
+        this.x += .025;
     }
 
     render(interval, color){

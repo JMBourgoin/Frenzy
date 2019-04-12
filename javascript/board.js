@@ -1,30 +1,37 @@
 
+import Pie from './pie';
+
 class Board {
     constructor(){
-        this.canvas = document.getElementById("myCanvas");
-        this.ctx = this.canvas.getContext("2d");
-        this.render = this.render.bind(this); 
+        this.topPie = new Pie(388, 199, 'top');
+        this.bottomPie = new Pie(389, 631, 'bottom');
+        this.centerPie = new Pie(389, 410, 'center');
+        this.leftTopPie = new Pie(186, 308, 'leftTop');
+        this.leftBottomPie = new Pie(186, 502, 'leftBottom');
+        this.rightTopPie = new Pie(592, 309, 'rightTop');
+        this.rightBottomPie = new Pie(592, 501, 'rightBottom');
     }
 
-    draw(){
-        let ctx = this.ctx;
-        const image = new Image();
-        image.addEventListener('load', function() {
-        ctx.drawImage(image, 0, 0);
-          }, false);
-        image.src = './app/assets/images/frenzyboard.png';
+    handleClick(pie){
+        debugger
+        pie.handleClick();
     }
-   
-   
+
     render(){
-        this.ctx.beginPath();
-        this.ctx.arc(375, 325, 325, 0, Math.PI*2, false);
-        this.ctx.fillStyle = "#212121";
-        this.ctx.fill();
-        this.ctx.closePath();
+        this.topPie.render();
+        this.bottomPie.render(); 
+        this.centerPie.render(); 
+        this.leftTopPie.render(); 
+        this.leftBottomPie.render(); 
+        this.rightTopPie.render();
+        this.rightBottomPie.render();
+        
     }
+    
+}
+   
+   
 
-};
 
 
 

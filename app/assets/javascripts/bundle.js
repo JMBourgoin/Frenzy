@@ -98,26 +98,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _javascript_pie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./javascript/pie */ "./javascript/pie.js");
 /* harmony import */ var _javascript_board__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./javascript/board */ "./javascript/board.js");
 /* harmony import */ var _javascript_timer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./javascript/timer */ "./javascript/timer.js");
+/* harmony import */ var _javascript_game__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./javascript/game */ "./javascript/game.js");
 
 
 
-var timer = new _javascript_timer__WEBPACK_IMPORTED_MODULE_2__["default"]();
-var topPie = new _javascript_pie__WEBPACK_IMPORTED_MODULE_0__["default"](388, 199);
-var bottomPie = new _javascript_pie__WEBPACK_IMPORTED_MODULE_0__["default"](388, 630);
-var centerPie = new _javascript_pie__WEBPACK_IMPORTED_MODULE_0__["default"](388, 410);
-var leftTopPie = new _javascript_pie__WEBPACK_IMPORTED_MODULE_0__["default"](186, 308);
-var leftBottomPie = new _javascript_pie__WEBPACK_IMPORTED_MODULE_0__["default"](186, 502);
-var rightTopPie = new _javascript_pie__WEBPACK_IMPORTED_MODULE_0__["default"](592, 309);
-var rightBottomPie = new _javascript_pie__WEBPACK_IMPORTED_MODULE_0__["default"](592, 501);
-timer.start();
-var pieArray = [topPie, bottomPie, centerPie, leftTopPie, leftBottomPie, rightTopPie, rightBottomPie];
 
-var startGameHandler = function startGameHandler(e) {};
+var game = new _javascript_game__WEBPACK_IMPORTED_MODULE_3__["default"]();
+game.start(); // -----------------------------------------------------
 
-pieArray.forEach(function (pie) {
-  return pie.render();
-});
-document.addEventListener('click', startGameHandler, false);
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var rect = canvas.getBoundingClientRect();
+var xmargin = rect.x;
+var ymargin = rect.x; // -------------------------------------------------------
+
+window.addEventListener('click', function (e) {
+  var x = e.pageX - xmargin;
+  var y = e.pageY - ymargin;
+  var topPie = game.board.topPie;
+  var bottomPie = game.board.bottomPie;
+  var leftTopPie = game.board.leftTopPie;
+  var leftBottomPie = game.board.leftBottomPie;
+  var rightTopPie = game.board.rightTopPie;
+  var rightBottomPie = game.board.rightBottomPie;
+
+  if (x > 353 && x < 423 && y > 164 && y < 234) {
+    console.log('click1');
+    game.board.handleClick(topPie);
+  } else if (x > 353 && x < 423 && y > 595 && y < 665) {
+    game.board.handleClick(bottomPie);
+  } else if (x > 151 && x < 221 && y > 273 && y < 343) {
+    game.board.handleClick(leftTopPie);
+  } else if (x > 151 && x < 221 && y > 467 && y < 502) {
+    game.board.handleClick(leftBottomPie);
+  } else if (x > 557 && x < 627 && y > 274 && y > 344) {
+    game.board.handleCick(rightTopPie);
+  } else if (x > 557 && x < 627 && y > 274 && y > 344) {
+    game.board.handleClick(rightBottomPie);
+  }
+}); // window.addEventListener('mousemove', function (e) {
+//     ctx.x = e.pageX;
+//     ctx.y = e.pageY;
+//     console.log("x: " + ctx.x);
+//     console.log("y: " + ctx.y);
+//   });
 
 /***/ }),
 
@@ -130,11 +154,14 @@ document.addEventListener('click', startGameHandler, false);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pie */ "./javascript/pie.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 var Board =
 /*#__PURE__*/
@@ -142,37 +169,164 @@ function () {
   function Board() {
     _classCallCheck(this, Board);
 
-    this.canvas = document.getElementById("myCanvas");
-    this.ctx = this.canvas.getContext("2d");
-    this.render = this.render.bind(this);
+    this.topPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](388, 199, 'top');
+    this.bottomPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](389, 631, 'bottom');
+    this.centerPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](389, 410, 'center');
+    this.leftTopPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](186, 308, 'leftTop');
+    this.leftBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](186, 502, 'leftBottom');
+    this.rightTopPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](592, 309, 'rightTop');
+    this.rightBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](592, 501, 'rightBottom');
   }
 
   _createClass(Board, [{
-    key: "draw",
-    value: function draw() {
-      var ctx = this.ctx;
-      var image = new Image();
-      image.addEventListener('load', function () {
-        ctx.drawImage(image, 0, 0);
-      }, false);
-      image.src = './app/assets/images/frenzyboard.png';
+    key: "handleClick",
+    value: function handleClick(pie) {
+      debugger;
+      pie.handleClick();
     }
   }, {
     key: "render",
     value: function render() {
-      this.ctx.beginPath();
-      this.ctx.arc(375, 325, 325, 0, Math.PI * 2, false);
-      this.ctx.fillStyle = "#212121";
-      this.ctx.fill();
-      this.ctx.closePath();
+      this.topPie.render();
+      this.bottomPie.render();
+      this.centerPie.render();
+      this.leftTopPie.render();
+      this.leftBottomPie.render();
+      this.rightTopPie.render();
+      this.rightBottomPie.render();
     }
   }]);
 
   return Board;
 }();
 
-;
 /* harmony default export */ __webpack_exports__["default"] = (Board);
+
+/***/ }),
+
+/***/ "./javascript/center.js":
+/*!******************************!*\
+  !*** ./javascript/center.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Center =
+/*#__PURE__*/
+function () {
+  function Center(x, y) {
+    _classCallCheck(this, Center);
+
+    this.x = x;
+    this.y = y;
+    this.wedge = '';
+    this.color = '';
+    this.render = this.render.bind(this);
+    this.draw = this.draw.bind(this);
+  }
+
+  _createClass(Center, [{
+    key: "addWedge",
+    value: function addWedge(_ref) {
+      var wedge = _ref.wedge,
+          color = _ref.color;
+      this.wedge = wedge;
+      this.color = color;
+    } // Canvas Rendering logic
+
+  }, {
+    key: "draw",
+    value: function draw() {
+      setInterval(this.render, 10);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var canvas = document.getElementById("myCanvas");
+      var ctx = canvas.getContext("2d");
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, 70, 0, Math.PI * 2, false);
+      ctx.strokeStyle = "#212121";
+      ctx.stroke();
+      ctx.closePath();
+    }
+  }]);
+
+  return Center;
+}();
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Center);
+
+/***/ }),
+
+/***/ "./javascript/game.js":
+/*!****************************!*\
+  !*** ./javascript/game.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _board_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./board.js */ "./javascript/board.js");
+/* harmony import */ var _timer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./timer.js */ "./javascript/timer.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+var Game =
+/*#__PURE__*/
+function () {
+  function Game() {
+    _classCallCheck(this, Game);
+
+    this.board = new _board_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    this.timer = new _timer_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    this.score = 0;
+    this.level = 1;
+    this.lives = 3;
+    this.render = this.render.bind(this);
+    this.intervalId = '';
+  }
+
+  _createClass(Game, [{
+    key: "start",
+    value: function start() {
+      this.intervalId = setInterval(this.render, 60);
+    }
+  }, {
+    key: "stop",
+    value: function stop() {
+      clearInterval(this.intervalId);
+    }
+  }, {
+    key: "render",
+    value: function render(level) {
+      this.level = level;
+      this.timer.draw();
+      this.board.render();
+    }
+  }]);
+
+  return Game;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Game);
 
 /***/ }),
 
@@ -194,17 +348,81 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Pie =
 /*#__PURE__*/
 function () {
-  function Pie(x, y) {
+  function Pie(x, y, region) {
     _classCallCheck(this, Pie);
 
     this.x = x;
     this.y = y;
+    this.region = region;
+    this.wedges = [];
+    this.colors = [];
+    this.render = this.render.bind(this);
   }
 
   _createClass(Pie, [{
-    key: "draw",
-    value: function draw() {
-      setInterval(render, 10);
+    key: "wedgeValid",
+    value: function wedgeValid(wedge) {
+      this.wedges.includes(wedge) ? false : true;
+    }
+  }, {
+    key: "addWedge",
+    value: function addWedge(wedge, color) {
+      if (this.wedgeValid(wedge)) {
+        this.wedges.push(wedge);
+        this.colors.push(color);
+      }
+    }
+  }, {
+    key: "full",
+    value: function full() {
+      this.pieces.length === 6 ? true : false;
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      this.wedges = [];
+      this.colors = [];
+    }
+  }, {
+    key: "score",
+    value: function score() {
+      var colorCounts = {
+        green: 0,
+        purple: 0,
+        orange: 0
+      };
+
+      for (var i = 0; i < this.colors.length; i++) {
+        switch (this.colors[i]) {
+          case "green":
+            colorCounts.green += 1;
+
+          case "purple":
+            colorCounts.purple += 1;
+
+          case "orange":
+            colorCounts.orange += 1;
+        }
+      }
+
+      var uniqueColors = new Set(this.colors);
+      var colorCountsArr = Object.values(colorCounts).sort;
+      var colorCountHigh = colorCountsArr[colorCountsArr.length - 1];
+
+      if (uniqueColors.length === 1) {
+        return 10;
+      } else if (colorCountHigh === 5) {
+        return 5;
+      } else if (colorCountHigh >= 3) {
+        return 2;
+      } else {
+        return 1;
+      }
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(event) {
+      alert('click');
     }
   }, {
     key: "render",
@@ -216,7 +434,8 @@ function () {
       ctx.arc(this.x, this.y, 70, 0, Math.PI * 2, false);
       ctx.strokeStyle = "#212121";
       ctx.stroke();
-      ctx.closePath();
+      ctx.closePath(); // ctx.addHitRegion({id: this.region});
+      // canvas.addEventListener('click', this.handleClick(event));
     }
   }]);
 
@@ -237,11 +456,14 @@ function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _center__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./center */ "./javascript/center.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 var Timer =
 /*#__PURE__*/
@@ -249,24 +471,15 @@ function () {
   function Timer() {
     _classCallCheck(this, Timer);
 
+    this.center = new _center__WEBPACK_IMPORTED_MODULE_0__["default"](388, 410);
     this.canvas = document.getElementById("myCanvas");
     this.ctx = this.canvas.getContext("2d");
-    this.gradient = this.ctx.createLinearGradient(20, 0, 220, 0);
-    this.gradient.addColorStop(0, 'green');
-    this.gradient.addColorStop(.5, 'yellow');
-    this.gradient.addColorStop(1, 'red');
     this.render = this.render.bind(this);
     this.draw = this.draw.bind(this);
-    this.start = this.start.bind(this);
-    this.x = .05;
+    this.x = .01;
   }
 
   _createClass(Timer, [{
-    key: "start",
-    value: function start() {
-      setInterval(this.draw, 50);
-    }
-  }, {
     key: "draw",
     value: function draw() {
       this.ctx.clearRect(0, 0, 800, 800);
@@ -285,7 +498,7 @@ function () {
         this.x = 0;
       }
 
-      this.x += .01;
+      this.x += .025;
     }
   }, {
     key: "render",
