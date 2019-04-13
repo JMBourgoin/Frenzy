@@ -1,7 +1,9 @@
 import Center from "./center";
 
 class Timer {
-    constructor (center) {
+    constructor (center, score) {
+        this.score = score;
+        this.interval = this.score.level * .025;
         this.center = center;
         this.canvas = document.getElementById("myCanvas");
         this.ctx = this.canvas.getContext("2d");
@@ -23,10 +25,11 @@ class Timer {
             color = 'red';
             this.render(this.x, color);
         } else {
+            this.score.takeLife();
             this.center.addWedge();
             this.x = 0;
         }
-        this.x += .025;
+        this.x += this.interval;
     }
 
     reset(){

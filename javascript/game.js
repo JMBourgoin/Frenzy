@@ -4,11 +4,9 @@ import Timer from './timer.js';
 class Game {
     constructor(){
         this.board = new Board();
-        this.score = 0;
-        this.level = 1;
-        this.lives = 3;
         this.render = this.render.bind(this);
         this.intervalId = '';
+        this.stop = this.stop.bind(this);
         
     }
 
@@ -20,9 +18,8 @@ class Game {
         clearInterval(this.intervalId);
     }
 
-    render(level){
-        this.level = level;
-        this.board.render();
+    render(){
+        this.board.render(this.stop);
     }
 
 }

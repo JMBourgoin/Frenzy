@@ -1,11 +1,13 @@
 class Pie {
-    constructor(x, y, center){
+    constructor(x, y, center, score){
         this.x = x;
         this.y = y;
         this.wedgeNums = [];
         this.colors = [];
         this.wedges = [];
         this.center = center;
+        this.score = score;
+
         this.render = this.render.bind(this);
         this.wedgePos = {
             0: {xv: this.x - 40, yv: this.y - 74},
@@ -16,6 +18,7 @@ class Pie {
             5: {xv: this.x - 75, yv: this.y - 66}
         };
         this.wedgeValid = this.wedgeValid.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     
@@ -34,12 +37,14 @@ class Pie {
     }
 
     clear(){
+        const points = this.pointScore();
+        this.score.addPoints(points);
         this.wedges = [];
         this.colors = [];
         this.wedgeNums = [];
     }
 
-    score(){
+    pointScore(){
         const colorCounts = {
             green: 0,
             purple: 0,
@@ -47,22 +52,23 @@ class Pie {
         }
 
         for(let i = 0; i < this.colors.length; i++){
-            switch(this.colors[i]){
-                case "green":
-                    colorCounts.green += 1;
-                case "purple":
-                    colorCounts.purple += 1;
-                case "orange":
-                    colorCounts.orange += 1;
+            if(this.colors[i] === "g"){
+                colorCounts.green += 1;
+            } else if(this.colors[i] === "p"){
+                colorCounts.purple += 1;
+            } else if(this.colors[i] === "o"){
+                colorCounts.orange += 1;
             }
         }
 
         const uniqueColors = new Set(this.colors);
-        const colorCountsArr = Object.values(colorCounts).sort;
+        const colorCountsArr = Object.values(colorCounts).sort();
         const colorCountHigh = colorCountsArr[colorCountsArr.length -1];
+        
+      
 
-        if(uniqueColors.length === 1){
-            return 10;
+        if(uniqueColors.size === 1){
+            return 15;
         } else if(colorCountHigh === 5){
             return 5;
         } else if (colorCountHigh >=3){
