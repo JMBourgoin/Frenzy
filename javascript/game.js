@@ -4,7 +4,6 @@ import Timer from './timer.js';
 class Game {
     constructor(){
         this.board = new Board();
-        this.timer = new Timer();
         this.score = 0;
         this.level = 1;
         this.lives = 3;
@@ -23,7 +22,6 @@ class Game {
 
     render(level){
         this.level = level;
-        this.timer.draw();
         this.board.render();
     }
 

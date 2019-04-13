@@ -36,7 +36,7 @@ a {
 /* CSS RESET -----------------------------------------------------------------------------------*/
 
 #root {
-    background-image: url('../app/assets/images/frenzyboard.png');
+    background-image: url('../app/assets/images/frenzyboard.svg');
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -44,6 +44,6 @@ a {
 canvas {
     background: none;
     display: block;
-    margin: 0 auto;
+    margin: 100px auto;
 }
 

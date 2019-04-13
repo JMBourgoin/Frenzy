@@ -110,9 +110,10 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var rect = canvas.getBoundingClientRect();
 var xmargin = rect.x;
-var ymargin = rect.x; // -------------------------------------------------------
+var ymargin = rect.y; // -------------------------------------------------------
 
 window.addEventListener('click', function (e) {
+  e.preventDefault();
   var x = e.pageX - xmargin;
   var y = e.pageY - ymargin;
   var topPie = game.board.topPie;
@@ -122,26 +123,32 @@ window.addEventListener('click', function (e) {
   var rightTopPie = game.board.rightTopPie;
   var rightBottomPie = game.board.rightBottomPie;
 
-  if (x > 353 && x < 423 && y > 164 && y < 234) {
+  if (x > 318 && x < 458 && y > 106 && y < 244) {
     console.log('click1');
-    game.board.handleClick(topPie);
-  } else if (x > 353 && x < 423 && y > 595 && y < 665) {
-    game.board.handleClick(bottomPie);
-  } else if (x > 151 && x < 221 && y > 273 && y < 343) {
-    game.board.handleClick(leftTopPie);
-  } else if (x > 151 && x < 221 && y > 467 && y < 502) {
-    game.board.handleClick(leftBottomPie);
-  } else if (x > 557 && x < 627 && y > 274 && y > 344) {
-    game.board.handleCick(rightTopPie);
-  } else if (x > 557 && x < 627 && y > 274 && y > 344) {
-    game.board.handleClick(rightBottomPie);
+    game.board.handleClick(e, topPie);
+  } else if (x > 318 && x < 458 && y > 536 && y < 681) {
+    console.log('click4');
+    game.board.handleClick(e, bottomPie);
+  } else if (x > 114 && x < 257 && y > 214 && y < 357) {
+    console.log('click6');
+    game.board.handleClick(e, leftTopPie);
+  } else if (x > 114 && x < 257 && y > 407 && y < 550) {
+    console.log('click5');
+    game.board.handleClick(e, leftBottomPie);
+  } else if (x > 518 && x < 661 && y > 214 && y < 357) {
+    console.log('click2');
+    game.board.handleClick(e, rightTopPie);
+  } else if (x > 518 && x < 661 && y > 407 && y < 550) {
+    console.log('click3');
+    game.board.handleClick(e, rightBottomPie);
   }
-}); // window.addEventListener('mousemove', function (e) {
-//     ctx.x = e.pageX;
-//     ctx.y = e.pageY;
-//     console.log("x: " + ctx.x);
-//     console.log("y: " + ctx.y);
-//   });
+}); // window.addEventListener('mousemove', function(e){
+//     e.preventDefault();
+//     let x = (e.pageX - xmargin);
+//     let y = (e.pageY -ymargin);
+//     console.log('x: ' + x);
+//     console.log('y: ' + y);
+// });
 
 /***/ }),
 
@@ -154,12 +161,18 @@ window.addEventListener('click', function (e) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pie */ "./javascript/pie.js");
+/* harmony import */ var _wedgeCollection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./wedgeCollection */ "./javascript/wedgeCollection.js");
+/* harmony import */ var _pie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pie */ "./javascript/pie.js");
+/* harmony import */ var _timer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./timer */ "./javascript/timer.js");
+/* harmony import */ var _center__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./center */ "./javascript/center.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
 
 
 
@@ -169,27 +182,35 @@ function () {
   function Board() {
     _classCallCheck(this, Board);
 
-    this.topPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](388, 199, 'top');
-    this.bottomPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](389, 631, 'bottom');
-    this.centerPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](389, 410, 'center');
-    this.leftTopPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](186, 308, 'leftTop');
-    this.leftBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](186, 502, 'leftBottom');
-    this.rightTopPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](592, 309, 'rightTop');
-    this.rightBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_0__["default"](592, 501, 'rightBottom');
+    this.wedges = new _wedgeCollection__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    this.wedges.createWedges();
+    this.center = new _center__WEBPACK_IMPORTED_MODULE_3__["default"](388, 383, this.wedges);
+    this.timer = new _timer__WEBPACK_IMPORTED_MODULE_2__["default"](this.center);
+    this.topPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 173, this.center);
+    this.bottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 605, this.center);
+    this.leftTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](185, 283, this.center);
+    this.leftBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](185, 475, this.center);
+    this.rightTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](589, 283, this.center);
+    this.rightBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](590, 475, this.center);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   _createClass(Board, [{
     key: "handleClick",
-    value: function handleClick(pie) {
-      debugger;
-      pie.handleClick();
+    value: function handleClick(e, pie) {
+      var timer = this.timer;
+      var wedges = this.wedges;
+      e.preventDefault();
+      e.stopPropagation();
+      pie.handleClick(e, timer, wedges);
     }
   }, {
     key: "render",
     value: function render() {
+      this.timer.draw();
       this.topPie.render();
       this.bottomPie.render();
-      this.centerPie.render();
+      this.center.render();
       this.leftTopPie.render();
       this.leftBottomPie.render();
       this.rightTopPie.render();
@@ -222,34 +243,57 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Center =
 /*#__PURE__*/
 function () {
-  function Center(x, y) {
+  function Center(x, y, wedges) {
     _classCallCheck(this, Center);
 
     this.x = x;
     this.y = y;
-    this.wedge = '';
-    this.color = '';
+    this.wedges = wedges;
+    var startWedge = this.wedges.randomWedge();
+    this.wedge = [startWedge];
     this.render = this.render.bind(this);
-    this.draw = this.draw.bind(this);
+    this.wedgePos = {
+      0: {
+        xv: this.x - 40,
+        yv: this.y - 74
+      },
+      1: {
+        xv: this.x - 3,
+        yv: this.y - 66
+      },
+      2: {
+        xv: this.x - 4,
+        yv: this.y - 2
+      },
+      3: {
+        xv: this.x - 40,
+        yv: this.y - 6
+      },
+      4: {
+        xv: this.x - 75,
+        yv: this.y - 3
+      },
+      5: {
+        xv: this.x - 75,
+        yv: this.y - 66
+      }
+    };
+    this.addWedge = this.addWedge.bind(this);
   }
 
   _createClass(Center, [{
     key: "addWedge",
-    value: function addWedge(_ref) {
-      var wedge = _ref.wedge,
-          color = _ref.color;
-      this.wedge = wedge;
-      this.color = color;
+    value: function addWedge() {
+      this.wedge = [];
+      var newWedge = this.wedges.randomWedge();
+      return this.wedge.push(newWedge);
     } // Canvas Rendering logic
 
   }, {
-    key: "draw",
-    value: function draw() {
-      setInterval(this.render, 10);
-    }
-  }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       var canvas = document.getElementById("myCanvas");
       var ctx = canvas.getContext("2d");
       ctx.lineWidth = 4;
@@ -258,6 +302,15 @@ function () {
       ctx.strokeStyle = "#212121";
       ctx.stroke();
       ctx.closePath();
+
+      if (this.wedge.length > 0) {
+        this.wedge.forEach(function (wedge) {
+          var num = wedge.num;
+          var x = _this.wedgePos[num].xv;
+          var y = _this.wedgePos[num].yv;
+          return ctx.drawImage(wedge.image, x, y);
+        });
+      }
     }
   }]);
 
@@ -296,7 +349,6 @@ function () {
     _classCallCheck(this, Game);
 
     this.board = new _board_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
-    this.timer = new _timer_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
     this.score = 0;
     this.level = 1;
     this.lives = 3;
@@ -318,7 +370,6 @@ function () {
     key: "render",
     value: function render(level) {
       this.level = level;
-      this.timer.draw();
       this.board.render();
     }
   }]);
@@ -348,40 +399,68 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Pie =
 /*#__PURE__*/
 function () {
-  function Pie(x, y, region) {
+  function Pie(x, y, center) {
     _classCallCheck(this, Pie);
 
     this.x = x;
     this.y = y;
-    this.region = region;
-    this.wedges = [];
+    this.wedgeNums = [];
     this.colors = [];
+    this.wedges = [];
+    this.center = center;
     this.render = this.render.bind(this);
+    this.wedgePos = {
+      0: {
+        xv: this.x - 40,
+        yv: this.y - 74
+      },
+      1: {
+        xv: this.x - 3,
+        yv: this.y - 66
+      },
+      2: {
+        xv: this.x - 4,
+        yv: this.y - 2
+      },
+      3: {
+        xv: this.x - 40,
+        yv: this.y - 6
+      },
+      4: {
+        xv: this.x - 75,
+        yv: this.y - 3
+      },
+      5: {
+        xv: this.x - 75,
+        yv: this.y - 66
+      }
+    };
+    this.wedgeValid = this.wedgeValid.bind(this);
   }
 
   _createClass(Pie, [{
     key: "wedgeValid",
     value: function wedgeValid(wedge) {
-      this.wedges.includes(wedge) ? false : true;
+      return this.wedgeNums.includes(wedge.num) ? false : true;
     }
   }, {
     key: "addWedge",
-    value: function addWedge(wedge, color) {
-      if (this.wedgeValid(wedge)) {
-        this.wedges.push(wedge);
-        this.colors.push(color);
-      }
+    value: function addWedge(wedge) {
+      this.wedgeNums.push(wedge.num);
+      this.colors.push(wedge.color);
+      this.wedges.push(wedge);
     }
   }, {
     key: "full",
     value: function full() {
-      this.pieces.length === 6 ? true : false;
+      return this.wedges.length === 6 ? true : false;
     }
   }, {
     key: "clear",
     value: function clear() {
       this.wedges = [];
       this.colors = [];
+      this.wedgeNums = [];
     }
   }, {
     key: "score",
@@ -421,12 +500,24 @@ function () {
     }
   }, {
     key: "handleClick",
-    value: function handleClick(event) {
-      alert('click');
+    value: function handleClick(e, timer, wedges) {
+      e.preventDefault();
+      var wedge = this.center.wedge[0];
+
+      if (this.wedgeValid(wedge)) {
+        timer.reset();
+        this.addWedge(wedge);
+      }
+
+      if (this.full()) {
+        this.clear();
+      }
     }
   }, {
     key: "render",
     value: function render() {
+      var _this = this;
+
       var canvas = document.getElementById("myCanvas");
       var ctx = canvas.getContext("2d");
       ctx.lineWidth = 4;
@@ -434,8 +525,18 @@ function () {
       ctx.arc(this.x, this.y, 70, 0, Math.PI * 2, false);
       ctx.strokeStyle = "#212121";
       ctx.stroke();
-      ctx.closePath(); // ctx.addHitRegion({id: this.region});
+      ctx.closePath();
+
+      if (this.wedges.length > 0) {
+        this.wedges.forEach(function (wedge) {
+          var num = wedge.num;
+          var x = _this.wedgePos[num].xv;
+          var y = _this.wedgePos[num].yv;
+          return ctx.drawImage(wedge.image, x, y);
+        });
+      } // ctx.addHitRegion({id: this.region});
       // canvas.addEventListener('click', this.handleClick(event));
+
     }
   }]);
 
@@ -468,10 +569,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Timer =
 /*#__PURE__*/
 function () {
-  function Timer() {
+  function Timer(center) {
     _classCallCheck(this, Timer);
 
-    this.center = new _center__WEBPACK_IMPORTED_MODULE_0__["default"](388, 410);
+    this.center = center;
     this.canvas = document.getElementById("myCanvas");
     this.ctx = this.canvas.getContext("2d");
     this.render = this.render.bind(this);
@@ -486,7 +587,7 @@ function () {
       var color = '';
 
       if (this.x < 1) {
-        color = 'green';
+        color = '#00FF00';
         this.render(this.x, color);
       } else if (this.x < 1.6 && this.x > .7) {
         color = 'yellow';
@@ -495,18 +596,25 @@ function () {
         color = 'red';
         this.render(this.x, color);
       } else {
+        this.center.addWedge();
         this.x = 0;
       }
 
       this.x += .025;
     }
   }, {
+    key: "reset",
+    value: function reset() {
+      this.center.addWedge();
+      this.x = .01;
+    }
+  }, {
     key: "render",
     value: function render(interval, color) {
-      var wid = 15 + this.x * 25;
+      var wid = 15 + this.x * 18;
       this.ctx.beginPath();
       this.ctx.lineWidth = wid;
-      this.ctx.arc(388, 410, 110, 0, Math.PI * interval, false);
+      this.ctx.arc(388, 383, 110, 0, Math.PI * interval, false);
       this.ctx.strokeStyle = color;
       this.ctx.stroke();
       this.ctx.closePath();
@@ -517,6 +625,103 @@ function () {
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = (Timer);
+
+/***/ }),
+
+/***/ "./javascript/wedgeCollection.js":
+/*!***************************************!*\
+  !*** ./javascript/wedgeCollection.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var WedgeCollection =
+/*#__PURE__*/
+function () {
+  function WedgeCollection() {
+    _classCallCheck(this, WedgeCollection);
+
+    this.wedges = [0, 1, 2, 3, 4, 5];
+    this.colors = ["p", "g", "o"];
+    this.purples = [];
+    this.oranges = [];
+    this.greens = [];
+    this.createWedges = this.createWedges.bind(this);
+    this.randomWedge = this.randomWedge.bind(this);
+  }
+
+  _createClass(WedgeCollection, [{
+    key: "createWedges",
+    value: function createWedges() {
+      var _this = this;
+
+      var oranges = ['o0', 'o1', 'o2', 'o3', 'o4', 'o5'];
+      var purples = ['p0', 'p1', 'p2', 'p3', 'p4', 'p5'];
+      var greens = ['g0', 'g1', 'g2', 'g3', 'g4', 'g5'];
+      greens.forEach(function (pic) {
+        var img = new Image();
+        img.src = "./app/assets/images/wedges/".concat(pic, ".png");
+        return _this.greens.push(img);
+      });
+      purples.forEach(function (pic) {
+        var img = new Image();
+        img.src = "./app/assets/images/wedges/".concat(pic, ".png");
+        return _this.purples.push(img);
+      });
+      oranges.forEach(function (pic) {
+        var img = new Image();
+        img.src = "./app/assets/images/wedges/".concat(pic, ".png");
+        return _this.oranges.push(img);
+      });
+    }
+  }, {
+    key: "randomNum",
+    value: function randomNum(max) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+  }, {
+    key: "randomWedge",
+    value: function randomWedge() {
+      var num = this.randomNum(6);
+      var color = this.colors[this.randomNum(3)];
+      var img = '';
+
+      if (color === 'g') {
+        img = this.greens[num];
+      } else if (color === 'p') {
+        img = this.purples[num];
+      } else if (color === 'o') {
+        img = this.oranges[num];
+      } // switch(color){
+      //     case 'g':
+      //         img = this.greens[num];
+      //     case 'p':
+      //         img = this.purples[num];
+      //     case 'o':
+      //         img = this.oranges[num];
+      // }
+
+
+      return {
+        num: num,
+        color: color,
+        image: img
+      };
+    }
+  }]);
+
+  return WedgeCollection;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (WedgeCollection);
 
 /***/ })
 

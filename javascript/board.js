@@ -1,31 +1,41 @@
-
+import WedgeCollection from './wedgeCollection';
 import Pie from './pie';
+import Timer from './timer';
+import Center from './center';
 
 class Board {
     constructor(){
-        this.topPie = new Pie(388, 199, 'top');
-        this.bottomPie = new Pie(389, 631, 'bottom');
-        this.centerPie = new Pie(389, 410, 'center');
-        this.leftTopPie = new Pie(186, 308, 'leftTop');
-        this.leftBottomPie = new Pie(186, 502, 'leftBottom');
-        this.rightTopPie = new Pie(592, 309, 'rightTop');
-        this.rightBottomPie = new Pie(592, 501, 'rightBottom');
+        this.wedges = new WedgeCollection();
+        this.wedges.createWedges();
+        this.center = new Center(388, 383, this.wedges);
+        this.timer = new Timer(this.center);
+        this.topPie = new Pie(388, 173, this.center);
+        this.bottomPie = new Pie(388, 605, this.center);
+        this.leftTopPie = new Pie(185, 283, this.center);
+        this.leftBottomPie = new Pie(185, 475, this.center);
+        this.rightTopPie = new Pie(589, 283, this.center);
+        this.rightBottomPie = new Pie(590, 475, this.center);
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(pie){
-        debugger
-        pie.handleClick();
+    handleClick(e, pie){
+        let timer = this.timer;
+        let wedges = this.wedges;
+        e.preventDefault();
+        e.stopPropagation();
+        pie.handleClick(e, timer, wedges);
     }
 
     render(){
+        this.timer.draw();
         this.topPie.render();
         this.bottomPie.render(); 
-        this.centerPie.render(); 
+        this.center.render(); 
         this.leftTopPie.render(); 
         this.leftBottomPie.render(); 
         this.rightTopPie.render();
         this.rightBottomPie.render();
-        
+
     }
     
 }

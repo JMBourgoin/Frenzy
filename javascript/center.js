@@ -1,23 +1,31 @@
 class Center {
-    constructor(x, y){
+    constructor(x, y, wedges){
         this.x = x;
         this.y = y;
-        this.wedge = '';
-        this.color = '';
+        this.wedges = wedges;
+        
+        const startWedge = this.wedges.randomWedge();
+        this.wedge = [startWedge];
+
         this.render = this.render.bind(this);
-        this.draw = this.draw.bind(this);
-    }
+        this.wedgePos = {
+            0: { xv: this.x - 40, yv: this.y - 74 },
+            1: { xv: this.x - 3, yv: this.y - 66 },
+            2: { xv: this.x - 4, yv: this.y - 2 },
+            3: { xv: this.x - 40, yv: this.y - 6 },
+            4: { xv: this.x - 75, yv: this.y - 3 },
+            5: { xv: this.x - 75, yv: this.y - 66 }
+        };
+        this.addWedge = this.addWedge.bind(this);
+        }
     
-    addWedge({wedge, color}){
-            this.wedge = wedge;
-            this.color = color;
+    addWedge(){
+        this.wedge = [];
+        let newWedge = this.wedges.randomWedge();
+        return this.wedge.push(newWedge);
     }
    
     // Canvas Rendering logic
-
-    draw(){
-        setInterval(this.render, 10);
-    }
 
     render(){
         var canvas = document.getElementById("myCanvas");
@@ -28,6 +36,17 @@ class Center {
         ctx.strokeStyle = "#212121";
         ctx.stroke();
         ctx.closePath();
+
+        if (this.wedge.length > 0) {
+            this.wedge.forEach(wedge => {
+                const num = wedge.num;
+                const x = this.wedgePos[num].xv;
+                const y = this.wedgePos[num].yv;
+                return ctx.drawImage(wedge.image, x, y);
+            });
+        }
+
+        
     }
 };
 
