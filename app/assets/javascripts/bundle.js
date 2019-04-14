@@ -103,8 +103,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var game = new _javascript_game__WEBPACK_IMPORTED_MODULE_3__["default"]();
-game.start(); // -----------------------------------------------------
+var game = new _javascript_game__WEBPACK_IMPORTED_MODULE_3__["default"](); // -----------------------------------------------------
 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
@@ -141,8 +140,15 @@ window.addEventListener('click', function (e) {
   } else if (x > 518 && x < 661 && y > 407 && y < 550) {
     console.log('click3');
     game.board.handleClick(e, rightBottomPie);
+  } else if (x > 171 && x < 225 && y > 98 && y < 150) {
+    console.log('start');
+    game.start();
+  } else if (x > 235 && x < 287 && y > 61 && y < 114) {
+    console.log('start');
+    game.stop();
   }
-}); // window.addEventListener('mousemove', function(e){
+}); // Code snippet to provide an x,y coordinate to print on the console relative to the game board.  Accounts for window size.
+// window.addEventListener('mousemove', function(e){
 //     e.preventDefault();
 //     let x = (e.pageX - xmargin);
 //     let y = (e.pageY -ymargin);
@@ -181,13 +187,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Board =
 /*#__PURE__*/
 function () {
-  function Board(stop) {
+  function Board() {
     _classCallCheck(this, Board);
 
     this.wedges = new _wedgeCollection__WEBPACK_IMPORTED_MODULE_0__["default"]();
     this.wedges.createWedges();
     this.center = new _center__WEBPACK_IMPORTED_MODULE_3__["default"](388, 383, this.wedges);
-    this.score = new _score__WEBPACK_IMPORTED_MODULE_4__["default"](stop);
+    this.score = new _score__WEBPACK_IMPORTED_MODULE_4__["default"]();
     this.timer = new _timer__WEBPACK_IMPORTED_MODULE_2__["default"](this.center, this.score);
     this.topPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 173, this.center, this.score);
     this.bottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 605, this.center, this.score);
@@ -200,12 +206,12 @@ function () {
 
   _createClass(Board, [{
     key: "handleClick",
-    value: function handleClick(e, pie) {
+    value: function handleClick(e, pie, game) {
       var timer = this.timer;
       var wedges = this.wedges;
       e.preventDefault();
       e.stopPropagation();
-      pie.handleClick(e, timer, wedges);
+      pie.handleClick(e, timer, game);
     }
   }, {
     key: "render",
@@ -286,6 +292,12 @@ function () {
   }
 
   _createClass(Center, [{
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, {
     key: "addWedge",
     value: function addWedge() {
       this.wedge = [];
@@ -371,7 +383,7 @@ function () {
   }, {
     key: "render",
     value: function render() {
-      this.board.render(this.stop);
+      this.board.render();
     }
   }]);
 
@@ -491,18 +503,18 @@ function () {
       var colorCountHigh = colorCountsArr[colorCountsArr.length - 1];
 
       if (uniqueColors.size === 1) {
-        return 15;
+        return 25;
       } else if (colorCountHigh === 5) {
-        return 5;
+        return 15;
       } else if (colorCountHigh >= 3) {
-        return 2;
+        return 10;
       } else {
-        return 1;
+        return 5;
       }
     }
   }, {
     key: "handleClick",
-    value: function handleClick(e, timer, wedges) {
+    value: function handleClick(e, timer) {
       e.preventDefault();
       var wedge = this.center.wedge[0];
 
@@ -568,10 +580,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Score =
 /*#__PURE__*/
 function () {
-  function Score(stop) {
+  function Score() {
     _classCallCheck(this, Score);
 
-    this.stop = stop;
     this.score = 0;
     this.lives = 3;
     this.level = 1;
@@ -589,7 +600,6 @@ function () {
     key: "takeLife",
     value: function takeLife() {
       this.lives -= 1;
-      return this.gameOver() ? this.stop() : null;
     }
   }, {
     key: "addLevel",
@@ -604,7 +614,7 @@ function () {
 
       if (this.levelCount >= 50) {
         this.levelCount = 0;
-        this.level += 1;
+        this.addLevel();
       }
     }
   }, {
@@ -662,16 +672,22 @@ function () {
     _classCallCheck(this, Timer);
 
     this.score = score;
-    this.interval = this.score.level * .025;
+    this.interval = this.score.level * 0.025;
     this.center = center;
     this.canvas = document.getElementById("myCanvas");
     this.ctx = this.canvas.getContext("2d");
     this.render = this.render.bind(this);
     this.draw = this.draw.bind(this);
-    this.x = .01;
+    this.reset = this.reset.bind(this);
+    this.incrementInterval = this.incrementInterval.bind(this);
   }
 
   _createClass(Timer, [{
+    key: "incrementInterval",
+    value: function incrementInterval() {
+      return this.x += this.score.level * 0.025;
+    }
+  }, {
     key: "draw",
     value: function draw() {
       this.ctx.clearRect(0, 0, 800, 800);
@@ -683,7 +699,7 @@ function () {
       } else if (this.x < 1.6 && this.x > .7) {
         color = 'yellow';
         this.render(this.x, color);
-      } else if (this.x <= 2) {
+      } else if (this.x < 2) {
         color = 'red';
         this.render(this.x, color);
       } else {
@@ -692,13 +708,13 @@ function () {
         this.x = 0;
       }
 
-      this.x += this.interval;
+      this.incrementInterval();
     }
   }, {
     key: "reset",
     value: function reset() {
       this.center.addWedge();
-      this.x = .01;
+      this.x = 0.01;
     }
   }, {
     key: "render",

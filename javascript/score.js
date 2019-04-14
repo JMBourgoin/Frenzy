@@ -1,6 +1,5 @@
 class Score {
-    constructor(stop){
-        this.stop = stop;
+    constructor(){
         this.score = 0;
         this.lives = 3;
         this.level = 1;
@@ -16,7 +15,6 @@ class Score {
 
     takeLife(){
         this.lives -= 1;
-       return this.gameOver() ? this.stop() : null;
     }
 
     addLevel(){
@@ -26,9 +24,10 @@ class Score {
     addPoints(points){
         this.score += points;
         this.levelCount += points;
+    
         if(this.levelCount >= 50){
             this.levelCount = 0;
-            this.level += 1
+            this.addLevel();
         }
     }
 

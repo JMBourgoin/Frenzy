@@ -3,14 +3,19 @@ import Center from "./center";
 class Timer {
     constructor (center, score) {
         this.score = score;
-        this.interval = this.score.level * .025;
+        this.interval = this.score.level * 0.025;
         this.center = center;
         this.canvas = document.getElementById("myCanvas");
         this.ctx = this.canvas.getContext("2d");
         this.render = this.render.bind(this);
         this.draw = this.draw.bind(this);
-        this.x = .01;
+        this.reset = this.reset.bind(this);
+        this.incrementInterval = this.incrementInterval.bind(this);
         }
+    
+    incrementInterval(){
+        return this.x += this.score.level * 0.025;
+    }
 
     draw(){
         this.ctx.clearRect(0, 0, 800, 800);
@@ -21,7 +26,7 @@ class Timer {
         } else if (this.x < 1.6 && this.x > .7) {
             color = 'yellow';
             this.render(this.x, color);
-        } else if (this.x <= 2) {
+        } else if (this.x < 2) {
             color = 'red';
             this.render(this.x, color);
         } else {
@@ -29,12 +34,12 @@ class Timer {
             this.center.addWedge();
             this.x = 0;
         }
-        this.x += this.interval;
+        this.incrementInterval();
     }
 
     reset(){
         this.center.addWedge();
-        this.x = .01;
+        this.x = 0.01;
     }
 
     render(interval, color){

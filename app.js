@@ -4,9 +4,6 @@ import Timer from './javascript/timer';
 import Game from './javascript/game';
 
 const game = new Game();
-game.start();
-
-
 // -----------------------------------------------------
 
 const canvas = document.getElementById("myCanvas");
@@ -45,9 +42,16 @@ window.addEventListener('click', function(e) {
     } else if ( x > 518 && x < 661 && y > 407 && y < 550){
         console.log('click3');
         game.board.handleClick(e, rightBottomPie);
-    }  
+    } else if ( x > 171 && x < 225 && y > 98 && y < 150){
+        console.log('start');
+        game.start();
+    }else if ( x > 235 && x < 287 && y > 61 && y < 114){
+        console.log('start');
+        game.stop();
+    }
 });
 
+// Code snippet to provide an x,y coordinate to print on the console relative to the game board.  Accounts for window size.
 
 // window.addEventListener('mousemove', function(e){
 //     e.preventDefault();

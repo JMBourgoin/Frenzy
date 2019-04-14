@@ -68,17 +68,17 @@ class Pie {
       
 
         if(uniqueColors.size === 1){
-            return 15;
+            return 25;
         } else if(colorCountHigh === 5){
-            return 5;
+            return 15;
         } else if (colorCountHigh >=3){
-            return 2;
+            return 10;
         } else {
-            return 1;
+            return 5;
         }
     }
     
-    handleClick(e, timer, wedges){
+    handleClick(e, timer){
         e.preventDefault();
         let wedge = this.center.wedge[0];
         if(this.wedgeValid(wedge)){
@@ -88,7 +88,6 @@ class Pie {
         if(this.full()){
             this.clear();
         }
-        
     }
 
 

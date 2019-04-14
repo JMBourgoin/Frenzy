@@ -19,7 +19,7 @@ class Game {
     }
 
     render(){
-        this.board.render(this.stop);
+        this.board.render();
     }
 
 }

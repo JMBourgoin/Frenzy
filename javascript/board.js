@@ -5,11 +5,11 @@ import Center from './center';
 import Score from './score';
 
 class Board {
-    constructor(stop){
+    constructor(){
         this.wedges = new WedgeCollection();
         this.wedges.createWedges();
         this.center = new Center(388, 383, this.wedges);
-        this.score = new Score(stop);
+        this.score = new Score();
         this.timer = new Timer(this.center, this.score);
         this.topPie = new Pie(388, 173, this.center, this.score);
         this.bottomPie = new Pie(388, 605, this.center, this.score);
@@ -20,12 +20,12 @@ class Board {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(e, pie){
+    handleClick(e, pie, game){
         let timer = this.timer;
         let wedges = this.wedges;
         e.preventDefault();
         e.stopPropagation();
-        pie.handleClick(e, timer, wedges);
+        pie.handleClick(e, timer, game);
     }
 
     render(){

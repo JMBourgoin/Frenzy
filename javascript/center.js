@@ -19,6 +19,11 @@ class Center {
         this.addWedge = this.addWedge.bind(this);
         }
     
+    handleClick(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+    }
     addWedge(){
         this.wedge = [];
         let newWedge = this.wedges.randomWedge();
