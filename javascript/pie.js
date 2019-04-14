@@ -38,7 +38,16 @@ class Pie {
 
     clear(){
         const points = this.pointScore();
+        if(points === 25){
+            this.score.addLife();
+        }
         this.score.addPoints(points);
+        this.wedges = [];
+        this.colors = [];
+        this.wedgeNums = [];
+    }
+    
+    newGame(){
         this.wedges = [];
         this.colors = [];
         this.wedgeNums = [];
@@ -108,6 +117,9 @@ class Pie {
                 const y = this.wedgePos[num].yv;
                 return ctx.drawImage(wedge.image, x, y);
             });
+            if(this.score.gameOver()){
+                this.newGame();
+            }
         }
     
 

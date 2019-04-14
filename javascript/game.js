@@ -3,10 +3,12 @@ import Timer from './timer.js';
 
 class Game {
     constructor(){
-        this.board = new Board();
+        this.canvas = document.getElementById("myCanvas");
+        this.ctx = this.canvas.getContext("2d");
         this.render = this.render.bind(this);
         this.intervalId = '';
         this.stop = this.stop.bind(this);
+        this.board = new Board(this.stop);
         
     }
 
@@ -16,6 +18,9 @@ class Game {
     
     stop(){
         clearInterval(this.intervalId);
+        this.ctx.clearRect(0, 0, 800, 800);
+
+
     }
 
     render(){

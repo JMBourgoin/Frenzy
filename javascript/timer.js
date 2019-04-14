@@ -3,7 +3,6 @@ import Center from "./center";
 class Timer {
     constructor (center, score) {
         this.score = score;
-        this.interval = this.score.level * 0.025;
         this.center = center;
         this.canvas = document.getElementById("myCanvas");
         this.ctx = this.canvas.getContext("2d");
@@ -14,20 +13,25 @@ class Timer {
         }
     
     incrementInterval(){
-        return this.x += this.score.level * 0.025;
+        if(this.score.level === 1){
+            return this.x += 0.025;
+        } else {
+            const multiplier = this.score.level * 0.75;
+            return this.x += multiplier * 0.025;
+        }
     }
 
     draw(){
         this.ctx.clearRect(0, 0, 800, 800);
         let color = '';
         if (this.x < 1) {
-            color = '#00FF00';
+            color = 'rgb(0,255,0,.5)';
             this.render(this.x, color);
         } else if (this.x < 1.6 && this.x > .7) {
-            color = 'yellow';
+            color = "rgb(204,0,255,.5)";
             this.render(this.x, color);
-        } else if (this.x < 2) {
-            color = 'red';
+        } else if (this.x <= 2) {
+            color = "rgb(255,0,0,.8)";
             this.render(this.x, color);
         } else {
             this.score.takeLife();

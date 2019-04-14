@@ -24,6 +24,7 @@ class Center {
         e.stopPropagation();
 
     }
+    
     addWedge(){
         this.wedge = [];
         let newWedge = this.wedges.randomWedge();

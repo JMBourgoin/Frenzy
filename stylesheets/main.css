@@ -42,8 +42,34 @@ a {
 }
 
 canvas {
+    position: relative;
     background: none;
     display: block;
     margin: 100px auto;
 }
+
+.game-over-modal {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    z-index: 99;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+}
+
+
+.game-over-image {
+    margin-top: 300px;
+    width: 800px;
+    
+}
+
+.hide {
+    display: none;
+}
+
 

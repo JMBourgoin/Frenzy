@@ -7,6 +7,7 @@ const game = new Game();
 // -----------------------------------------------------
 
 const canvas = document.getElementById("myCanvas");
+const gameOver = document.getElementById("gameOver");
 const ctx = canvas.getContext("2d");
 const rect = canvas.getBoundingClientRect();
 const xmargin = rect.x;
@@ -29,6 +30,9 @@ window.addEventListener('click', function(e) {
         game.board.handleClick(e, topPie);
     } else if (x > 318 && x < 458 && y > 536 && y < 681){
         console.log('click4');
+        if(gameOver.className === "game-over-modal"){
+            gameOver.className = "hide";
+        }
         game.board.handleClick(e, bottomPie);
     } else if (x > 114 && x < 257 && y > 214 && y < 357){
         console.log('click6');
@@ -46,7 +50,8 @@ window.addEventListener('click', function(e) {
         console.log('start');
         game.start();
     }else if ( x > 235 && x < 287 && y > 61 && y < 114){
-        console.log('start');
+        console.log('stop');
+        game.board.gameOver();
         game.stop();
     }
 });

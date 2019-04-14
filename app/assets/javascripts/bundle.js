@@ -106,6 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 var game = new _javascript_game__WEBPACK_IMPORTED_MODULE_3__["default"](); // -----------------------------------------------------
 
 var canvas = document.getElementById("myCanvas");
+var gameOver = document.getElementById("gameOver");
 var ctx = canvas.getContext("2d");
 var rect = canvas.getBoundingClientRect();
 var xmargin = rect.x;
@@ -127,6 +128,11 @@ window.addEventListener('click', function (e) {
     game.board.handleClick(e, topPie);
   } else if (x > 318 && x < 458 && y > 536 && y < 681) {
     console.log('click4');
+
+    if (gameOver.className === "game-over-modal") {
+      gameOver.className = "hide";
+    }
+
     game.board.handleClick(e, bottomPie);
   } else if (x > 114 && x < 257 && y > 214 && y < 357) {
     console.log('click6');
@@ -144,7 +150,8 @@ window.addEventListener('click', function (e) {
     console.log('start');
     game.start();
   } else if (x > 235 && x < 287 && y > 61 && y < 114) {
-    console.log('start');
+    console.log('stop');
+    game.board.gameOver();
     game.stop();
   }
 }); // Code snippet to provide an x,y coordinate to print on the console relative to the game board.  Accounts for window size.
@@ -187,9 +194,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Board =
 /*#__PURE__*/
 function () {
-  function Board() {
+  function Board(stop) {
     _classCallCheck(this, Board);
 
+    this.stop = stop;
     this.wedges = new _wedgeCollection__WEBPACK_IMPORTED_MODULE_0__["default"]();
     this.wedges.createWedges();
     this.center = new _center__WEBPACK_IMPORTED_MODULE_3__["default"](388, 383, this.wedges);
@@ -214,6 +222,18 @@ function () {
       pie.handleClick(e, timer, game);
     }
   }, {
+    key: "gameOver",
+    value: function gameOver() {
+      this.score.newGame();
+      this.topPie.newGame();
+      this.bottomPie.newGame();
+      this.leftTopPie.newGame();
+      this.leftBottomPie.newGame();
+      this.rightTopPie.newGame();
+      this.rightBottomPie.newGame();
+      this.timer.reset();
+    }
+  }, {
     key: "render",
     value: function render() {
       this.timer.draw();
@@ -225,6 +245,13 @@ function () {
       this.leftBottomPie.render();
       this.rightTopPie.render();
       this.rightBottomPie.render();
+
+      if (this.score.gameOver()) {
+        this.gameOver();
+        this.stop();
+        var gameOver = document.getElementById("gameOver");
+        gameOver.className = "game-over-modal";
+      }
     }
   }]);
 
@@ -364,10 +391,12 @@ function () {
   function Game() {
     _classCallCheck(this, Game);
 
-    this.board = new _board_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    this.canvas = document.getElementById("myCanvas");
+    this.ctx = this.canvas.getContext("2d");
     this.render = this.render.bind(this);
     this.intervalId = '';
     this.stop = this.stop.bind(this);
+    this.board = new _board_js__WEBPACK_IMPORTED_MODULE_0__["default"](this.stop);
   }
 
   _createClass(Game, [{
@@ -379,6 +408,7 @@ function () {
     key: "stop",
     value: function stop() {
       clearInterval(this.intervalId);
+      this.ctx.clearRect(0, 0, 800, 800);
     }
   }, {
     key: "render",
@@ -474,7 +504,19 @@ function () {
     key: "clear",
     value: function clear() {
       var points = this.pointScore();
+
+      if (points === 25) {
+        this.score.addLife();
+      }
+
       this.score.addPoints(points);
+      this.wedges = [];
+      this.colors = [];
+      this.wedgeNums = [];
+    }
+  }, {
+    key: "newGame",
+    value: function newGame() {
       this.wedges = [];
       this.colors = [];
       this.wedgeNums = [];
@@ -548,6 +590,10 @@ function () {
           var y = _this.wedgePos[num].yv;
           return ctx.drawImage(wedge.image, x, y);
         });
+
+        if (this.score.gameOver()) {
+          this.newGame();
+        }
       } // ctx.addHitRegion({id: this.region});
       // canvas.addEventListener('click', this.handleClick(event));
 
@@ -584,7 +630,7 @@ function () {
     _classCallCheck(this, Score);
 
     this.score = 0;
-    this.lives = 3;
+    this.lives = 6;
     this.level = 1;
     this.levelCount = 0;
     this.addPoints = this.addPoints.bind(this);
@@ -615,7 +661,16 @@ function () {
       if (this.levelCount >= 50) {
         this.levelCount = 0;
         this.addLevel();
+        this.addLife();
       }
+    }
+  }, {
+    key: "newGame",
+    value: function newGame() {
+      this.score = 0;
+      this.lives = 6;
+      this.level = 1;
+      this.levelCount = 0;
     }
   }, {
     key: "gameOver",
@@ -672,7 +727,6 @@ function () {
     _classCallCheck(this, Timer);
 
     this.score = score;
-    this.interval = this.score.level * 0.025;
     this.center = center;
     this.canvas = document.getElementById("myCanvas");
     this.ctx = this.canvas.getContext("2d");
@@ -685,7 +739,12 @@ function () {
   _createClass(Timer, [{
     key: "incrementInterval",
     value: function incrementInterval() {
-      return this.x += this.score.level * 0.025;
+      if (this.score.level === 1) {
+        return this.x += 0.025;
+      } else {
+        var multiplier = this.score.level * 0.75;
+        return this.x += multiplier * 0.025;
+      }
     }
   }, {
     key: "draw",
@@ -694,13 +753,13 @@ function () {
       var color = '';
 
       if (this.x < 1) {
-        color = '#00FF00';
+        color = 'rgb(0,255,0,.5)';
         this.render(this.x, color);
       } else if (this.x < 1.6 && this.x > .7) {
-        color = 'yellow';
+        color = "rgb(204,0,255,.5)";
         this.render(this.x, color);
-      } else if (this.x < 2) {
-        color = 'red';
+      } else if (this.x <= 2) {
+        color = "rgb(255,0,0,.8)";
         this.render(this.x, color);
       } else {
         this.score.takeLife();

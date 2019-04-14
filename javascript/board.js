@@ -5,7 +5,8 @@ import Center from './center';
 import Score from './score';
 
 class Board {
-    constructor(){
+    constructor(stop){
+        this.stop = stop;
         this.wedges = new WedgeCollection();
         this.wedges.createWedges();
         this.center = new Center(388, 383, this.wedges);
@@ -28,6 +29,17 @@ class Board {
         pie.handleClick(e, timer, game);
     }
 
+    gameOver(){
+        this.score.newGame();
+        this.topPie.newGame();
+        this.bottomPie.newGame();
+        this.leftTopPie.newGame();
+        this.leftBottomPie.newGame();
+        this.rightTopPie.newGame();
+        this.rightBottomPie.newGame();
+        this.timer.reset();
+    }
+
     render(){
         this.timer.draw();
         this.score.render();
@@ -38,6 +50,12 @@ class Board {
         this.leftBottomPie.render(); 
         this.rightTopPie.render();
         this.rightBottomPie.render();
+        if(this.score.gameOver()){
+            this.gameOver();
+            this.stop();
+            const gameOver = document.getElementById("gameOver");
+            gameOver.className = "game-over-modal";
+        }
 
     }
     

@@ -1,7 +1,7 @@
 class Score {
     constructor(){
         this.score = 0;
-        this.lives = 3;
+        this.lives = 6;
         this.level = 1;
         this.levelCount = 0;
 
@@ -28,7 +28,15 @@ class Score {
         if(this.levelCount >= 50){
             this.levelCount = 0;
             this.addLevel();
+            this.addLife();
         }
+    }
+    
+    newGame(){
+        this.score = 0;
+        this.lives = 6;
+        this.level = 1;
+        this.levelCount = 0;
     }
 
     gameOver(){
