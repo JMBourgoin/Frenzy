@@ -30,6 +30,7 @@ class Pie {
         this.wedgeNums.push(wedge.num);
         this.colors.push(wedge.color);
         this.wedges.push(wedge);
+        this.score.addPoints(1);
     }
     
     full(){
@@ -73,10 +74,8 @@ class Pie {
         const uniqueColors = new Set(this.colors);
         const colorCountsArr = Object.values(colorCounts).sort();
         const colorCountHigh = colorCountsArr[colorCountsArr.length -1];
-        
-      
-
-        if(uniqueColors.size === 1){
+    
+        if(uniqueColors.size === 1 && this.wedges.length === 6){
             return 25;
         } else if(colorCountHigh === 5){
             return 15;

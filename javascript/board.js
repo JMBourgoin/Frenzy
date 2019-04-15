@@ -7,6 +7,8 @@ import SoundCollection from './soundCollection';
 import $ from 'jquery';
 import RadioActive from './radioactive';
 import Five from './five';
+import Hourglass from './hourglass';
+
 
 class Board {
     constructor(stop){
@@ -30,7 +32,8 @@ class Board {
         this.radioActive.generateImage();
         this.five = new Five (458, 128, this.center, this.score);
         this.five.generateImage();
-        
+        this.hourglass = new Hourglass(626, 371, this.center, this.score);
+        this.hourglass.generateImage();
     }
 
     handleClick(e, pie, game){
@@ -66,6 +69,7 @@ class Board {
         this.rightBottomPie.render();
         this.radioActive.render();
         this.five.render();
+        this.hourglass.render();
         if(this.score.gameOver()){
             this.sounds.playGameOver();
             this.gameOver();

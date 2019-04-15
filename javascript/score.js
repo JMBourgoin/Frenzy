@@ -6,8 +6,11 @@ class Score {
         this.levelCount = 0;
         this.radioactive = false;
         this.five = false;
+        this.hourglass = false;
         this.yourScore = 0;
+        this.sandsTime = 0;
         this.fiveScore = 0;
+        this.radioActiveCount = 0;
 
         this.addPoints = this.addPoints.bind(this);
         this.takeLife = this.takeLife.bind(this);
@@ -22,8 +25,17 @@ class Score {
         return this.five;
     }
 
+    isHourglass(){
+        return this.hourglass;
+    }
+
     addFive(){
         this.lives += 5;
+        this.score += 25;
+    }
+
+    rewindTime(){
+        this.level -= 2;
     }
 
     addLife(){
@@ -42,10 +54,21 @@ class Score {
         this.five = false;
     }
 
+    deactivateHourglass(){
+        this.hourglass = false;
+    }
+
     addLevel(){
         this.level += 1;
-        if(this.radioactive === false){
+        this.sandsTime += 1;
+        this.radioActiveCount += 0.5;
+
+        if(this.radioActiveCount === 1 && this.radioactive === false){
             this.radioactive = true;
+            this.radioActiveCount = 0;
+        }
+        if(this.sandsTime % 7 === 0 && this.hourglass === false){
+            this.hourglass = true;
         }
     }
 
@@ -59,9 +82,10 @@ class Score {
             this.addLevel();
             this.addLife();
         }
-        if((this.score > 200 && this.score < 230 && !this.isFive()) || (this.score > 500 && this.score < 600 && !this.isFive())){
+        if((this.score > 200 && this.score < 230 && !this.isFive()) || (this.score > 500 && this.score < 530 && !this.isFive())){
             this.five = true;
         }
+
     }
 
     newGame(){

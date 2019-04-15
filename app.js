@@ -71,13 +71,24 @@ window.addEventListener('click', function(e) {
         game.stop();
 
     } else if ( x > 97 && x < 159 && y > 368 && y < 420){
-        console.log('radioactive');
-        game.board.radioActive.handleClick(e);
+        if(game.board.score.isRadioactive()){
+            console.log('radioactive');
+            game.board.radioActive.handleClick(e);
+            game.board.sounds.playRadioactive();
+        }
 
     } else if ( x > 459 && x < 515 && y > 124 && y <186){
-        console.log('5x');
-        game.board.five.handleClick(e);
+        if(game.board.score.isFive()){
+            console.log('5x');
+            game.board.five.handleClick(e);
+            game.board.sounds.playFiveX();
+        }
 
+    } else if ( x > 619 && x < 683 && y > 367 && y < 423){
+        if(game.board.score.isHourglass()){
+            console.log('hourglass');
+            game.board.hourglass.handleClick(e);
+        }
     } else if (x > 449 && x < 511 && y > 46 && y < 70){
         console.log('jmb');
         window.open('https://jmbourgoin.com');
@@ -85,7 +96,7 @@ window.addEventListener('click', function(e) {
     } else if (x > 532 && x < 562 && y > 65 && y < 95){
         console.log('github');
         window.open('https://github.com/jmbourgoin');
-        
+
     } else if (x > 582 && x < 609 && y > 102 && y < 130){
         console.log('insta');
         window.open('https://www.instagram.com/jmb.shots/');

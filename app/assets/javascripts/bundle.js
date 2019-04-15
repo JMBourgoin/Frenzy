@@ -161,11 +161,22 @@ window.addEventListener('click', function (e) {
     game.board.gameOver();
     game.stop();
   } else if (x > 97 && x < 159 && y > 368 && y < 420) {
-    console.log('radioactive');
-    game.board.radioActive.handleClick(e);
+    if (game.board.score.isRadioactive()) {
+      console.log('radioactive');
+      game.board.radioActive.handleClick(e);
+      game.board.sounds.playRadioactive();
+    }
   } else if (x > 459 && x < 515 && y > 124 && y < 186) {
-    console.log('5x');
-    game.board.five.handleClick(e);
+    if (game.board.score.isFive()) {
+      console.log('5x');
+      game.board.five.handleClick(e);
+      game.board.sounds.playFiveX();
+    }
+  } else if (x > 619 && x < 683 && y > 367 && y < 423) {
+    if (game.board.score.isHourglass()) {
+      console.log('hourglass');
+      game.board.hourglass.handleClick(e);
+    }
   } else if (x > 449 && x < 511 && y > 46 && y < 70) {
     console.log('jmb');
     window.open('https://jmbourgoin.com');
@@ -209,11 +220,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _radioactive__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./radioactive */ "./javascript/radioactive.js");
 /* harmony import */ var _five__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./five */ "./javascript/five.js");
+/* harmony import */ var _hourglass__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./hourglass */ "./javascript/hourglass.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -251,6 +264,8 @@ function () {
     this.radioActive.generateImage();
     this.five = new _five__WEBPACK_IMPORTED_MODULE_8__["default"](458, 128, this.center, this.score);
     this.five.generateImage();
+    this.hourglass = new _hourglass__WEBPACK_IMPORTED_MODULE_9__["default"](626, 371, this.center, this.score);
+    this.hourglass.generateImage();
   }
 
   _createClass(Board, [{
@@ -290,6 +305,7 @@ function () {
       this.rightBottomPie.render();
       this.radioActive.render();
       this.five.render();
+      this.hourglass.render();
 
       if (this.score.gameOver()) {
         this.sounds.playGameOver();
@@ -539,6 +555,69 @@ function () {
 
 /***/ }),
 
+/***/ "./javascript/hourglass.js":
+/*!*********************************!*\
+  !*** ./javascript/hourglass.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Hourglass =
+/*#__PURE__*/
+function () {
+  function Hourglass(x, y, center, score) {
+    _classCallCheck(this, Hourglass);
+
+    this.image = '';
+    this.x = x;
+    this.y = y;
+    this.center = center;
+    this.score = score;
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  _createClass(Hourglass, [{
+    key: "generateImage",
+    value: function generateImage() {
+      var img = new Image();
+      img.src = "./app/assets/images/hourglass.png";
+      this.image = img;
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
+      this.score.rewindTime();
+      this.score.deactivateHourglass();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.score.isHourglass()) {
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var x = this.x;
+        var y = this.y;
+        return ctx.drawImage(this.image, x, y);
+      }
+    }
+  }]);
+
+  return Hourglass;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Hourglass);
+
+/***/ }),
+
 /***/ "./javascript/pie.js":
 /*!***************************!*\
   !*** ./javascript/pie.js ***!
@@ -609,6 +688,7 @@ function () {
       this.wedgeNums.push(wedge.num);
       this.colors.push(wedge.color);
       this.wedges.push(wedge);
+      this.score.addPoints(1);
     }
   }, {
     key: "full",
@@ -659,7 +739,7 @@ function () {
       var colorCountsArr = Object.values(colorCounts).sort();
       var colorCountHigh = colorCountsArr[colorCountsArr.length - 1];
 
-      if (uniqueColors.size === 1) {
+      if (uniqueColors.size === 1 && this.wedges.length === 6) {
         return 25;
       } else if (colorCountHigh === 5) {
         return 15;
@@ -818,8 +898,11 @@ function () {
     this.levelCount = 0;
     this.radioactive = false;
     this.five = false;
+    this.hourglass = false;
     this.yourScore = 0;
+    this.sandsTime = 0;
     this.fiveScore = 0;
+    this.radioActiveCount = 0;
     this.addPoints = this.addPoints.bind(this);
     this.takeLife = this.takeLife.bind(this);
     this.deactivateRadioactive = this.deactivateRadioactive.bind(this);
@@ -836,9 +919,20 @@ function () {
       return this.five;
     }
   }, {
+    key: "isHourglass",
+    value: function isHourglass() {
+      return this.hourglass;
+    }
+  }, {
     key: "addFive",
     value: function addFive() {
       this.lives += 5;
+      this.score += 25;
+    }
+  }, {
+    key: "rewindTime",
+    value: function rewindTime() {
+      this.level -= 2;
     }
   }, {
     key: "addLife",
@@ -861,12 +955,24 @@ function () {
       this.five = false;
     }
   }, {
+    key: "deactivateHourglass",
+    value: function deactivateHourglass() {
+      this.hourglass = false;
+    }
+  }, {
     key: "addLevel",
     value: function addLevel() {
       this.level += 1;
+      this.sandsTime += 1;
+      this.radioActiveCount += 0.5;
 
-      if (this.radioactive === false) {
+      if (this.radioActiveCount === 1 && this.radioactive === false) {
         this.radioactive = true;
+        this.radioActiveCount = 0;
+      }
+
+      if (this.sandsTime % 7 === 0 && this.hourglass === false) {
+        this.hourglass = true;
       }
     }
   }, {
@@ -882,7 +988,7 @@ function () {
         this.addLife();
       }
 
-      if (this.score > 200 && this.score < 230 && !this.isFive() || this.score > 500 && this.score < 600 && !this.isFive()) {
+      if (this.score > 200 && this.score < 230 && !this.isFive() || this.score > 500 && this.score < 530 && !this.isFive()) {
         this.five = true;
       }
     }
@@ -951,10 +1057,14 @@ function () {
     this.center = '';
     this.quit = '';
     this.gameOver = '';
+    this.fiveX = '';
+    this.radioActive = '';
     this.playCenter = this.playCenter.bind(this);
     this.playPieWedge = this.playPieWedge.bind(this);
     this.playClear = this.playClear.bind(this);
     this.playGameOver = this.playGameOver.bind(this);
+    this.playRadioactive = this.playRadioactive.bind(this);
+    this.playFiveX = this.playFiveX.bind(this);
   }
 
   _createClass(SoundCollection, [{
@@ -988,6 +1098,16 @@ function () {
       this.gameOver.play();
     }
   }, {
+    key: "playRadioactive",
+    value: function playRadioactive() {
+      this.radioActive.play();
+    }
+  }, {
+    key: "playFiveX",
+    value: function playFiveX() {
+      this.fiveX.play();
+    }
+  }, {
     key: "pauseAll",
     value: function pauseAll() {
       this.pieWedge.pause();
@@ -1012,6 +1132,10 @@ function () {
       this.start.src = "./app/assets/sounds/start.mp3";
       this.gameOver = document.createElement("audio");
       this.gameOver.src = "./app/assets/sounds/gameover.mp3";
+      this.radioActive = document.createElement("audio");
+      this.radioActive.src = "./app/assets/sounds/radioactive.mp3";
+      this.fiveX = document.createElement("audio");
+      this.fiveX.src = "./app/assets/sounds/5x.mp3";
     }
   }]);
 
@@ -1077,13 +1201,13 @@ function () {
       this.ctx.clearRect(0, 0, 800, 800);
       var color = '';
 
-      if (this.x < 1) {
+      if (this.x <= .7) {
         color = 'rgb(0,255,0,.3)';
         this.render(this.x, color);
       } else if (this.x < 1.6 && this.x > .7) {
         color = "rgb(204,0,255,.3)";
         this.render(this.x, color);
-      } else if (this.x <= 2) {
+      } else if (this.x > 1.6 && this.x <= 2) {
         color = "rgb(255,0,0,.5)";
         this.render(this.x, color);
       } else {

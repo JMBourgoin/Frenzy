@@ -28,13 +28,13 @@ class Timer {
     draw(){
         this.ctx.clearRect(0, 0, 800, 800);
         let color = '';
-        if (this.x < 1) {
+        if (this.x <= .7) {
             color = 'rgb(0,255,0,.3)';
             this.render(this.x, color);
         } else if (this.x < 1.6 && this.x > .7) {
             color = "rgb(204,0,255,.3)";
             this.render(this.x, color);
-        } else if (this.x <= 2) {
+        } else if (this.x > 1.6 && this.x <= 2) {
             color = "rgb(255,0,0,.5)";
             this.render(this.x, color);
         } else {
