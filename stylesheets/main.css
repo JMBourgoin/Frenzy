@@ -45,7 +45,7 @@ canvas {
     position: relative;
     background: none;
     display: block;
-    margin: 100px auto;
+    margin: 0 auto;
 }
 
 .game-over-modal {
