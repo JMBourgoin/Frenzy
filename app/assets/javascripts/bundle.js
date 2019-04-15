@@ -160,6 +160,9 @@ window.addEventListener('click', function (e) {
     game.board.sounds.playQuit();
     game.board.gameOver();
     game.stop();
+  } else if (x > 97 && x < 159 && y > 368 && y < 420) {
+    console.log('radioactive');
+    game.board.radioActive.handleClick(e);
   } else if (x > 449 && x < 511 && y > 46 && y < 70) {
     console.log('jmb');
     window.open('https://jmbourgoin.com');
@@ -201,11 +204,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _soundCollection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./soundCollection */ "./javascript/soundCollection.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _radioactive__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./radioactive */ "./javascript/radioactive.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -236,6 +241,9 @@ function () {
     this.rightTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](589, 283, this.center, this.score);
     this.rightBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](590, 475, this.center, this.score);
     this.handleClick = this.handleClick.bind(this);
+    var pieShop = [this.topPie, this.bottomPie, this.leftTopPie, this.leftBottomPie, this.rightTopPie, this.rightBottomPie];
+    this.radioActive = new _radioactive__WEBPACK_IMPORTED_MODULE_7__["default"](103, 373, pieShop, this.center, this.score);
+    this.radioActive.generateImage();
   }
 
   _createClass(Board, [{
@@ -273,6 +281,7 @@ function () {
       this.leftBottomPie.render();
       this.rightTopPie.render();
       this.rightBottomPie.render();
+      this.radioActive.render();
 
       if (this.score.gameOver()) {
         this.sounds.playGameOver();
@@ -645,6 +654,72 @@ function () {
 
 /***/ }),
 
+/***/ "./javascript/radioactive.js":
+/*!***********************************!*\
+  !*** ./javascript/radioactive.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var RadioActive =
+/*#__PURE__*/
+function () {
+  function RadioActive(x, y, pieShop, center, score) {
+    _classCallCheck(this, RadioActive);
+
+    this.image = '';
+    this.x = x;
+    this.y = y;
+    this.pieShop = pieShop;
+    this.center = center;
+    this.score = score;
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  _createClass(RadioActive, [{
+    key: "generateImage",
+    value: function generateImage() {
+      var img = new Image();
+      img.src = "./app/assets/images/radioactive.png";
+      this.image = img;
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
+      this.pieShop.forEach(function (pie) {
+        return pie.clear();
+      });
+      this.score.deactivateRadioactive();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.score.isRadioactive()) {
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var x = this.x;
+        var y = this.y;
+        return ctx.drawImage(this.image, x, y);
+      }
+    }
+  }]);
+
+  return RadioActive;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (RadioActive);
+
+/***/ }),
+
 /***/ "./javascript/score.js":
 /*!*****************************!*\
   !*** ./javascript/score.js ***!
@@ -670,12 +745,19 @@ function () {
     this.lives = 6;
     this.level = 1;
     this.levelCount = 0;
+    this.radioactive = false;
     this.yourScore = 0;
     this.addPoints = this.addPoints.bind(this);
     this.takeLife = this.takeLife.bind(this);
+    this.deactivateRadioactive = this.deactivateRadioactive.bind(this);
   }
 
   _createClass(Score, [{
+    key: "isRadioactive",
+    value: function isRadioactive() {
+      return this.radioactive;
+    }
+  }, {
     key: "addLife",
     value: function addLife() {
       this.lives += 1;
@@ -686,9 +768,18 @@ function () {
       this.lives -= 1;
     }
   }, {
+    key: "deactivateRadioactive",
+    value: function deactivateRadioactive() {
+      this.radioactive = false;
+    }
+  }, {
     key: "addLevel",
     value: function addLevel() {
       this.level += 1;
+
+      if (this.radioactive === false) {
+        this.radioactive = true;
+      }
     }
   }, {
     key: "addPoints",

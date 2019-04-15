@@ -5,6 +5,7 @@ import Center from './center';
 import Score from './score';
 import SoundCollection from './soundCollection';
 import $ from 'jquery';
+import RadioActive from './radioactive';
 
 class Board {
     constructor(stop){
@@ -23,6 +24,10 @@ class Board {
         this.rightTopPie = new Pie(589, 283, this.center, this.score);
         this.rightBottomPie = new Pie(590, 475, this.center, this.score);
         this.handleClick = this.handleClick.bind(this);
+        const pieShop = [this.topPie, this.bottomPie, this.leftTopPie, this.leftBottomPie, this.rightTopPie, this.rightBottomPie];
+        this.radioActive = new RadioActive(103, 373, pieShop, this.center, this.score);
+        this.radioActive.generateImage();
+        
     }
 
     handleClick(e, pie, game){
@@ -56,6 +61,7 @@ class Board {
         this.leftBottomPie.render(); 
         this.rightTopPie.render();
         this.rightBottomPie.render();
+        this.radioActive.render();
         if(this.score.gameOver()){
             this.sounds.playGameOver();
             this.gameOver();
@@ -65,7 +71,6 @@ class Board {
             const $yourScore = $("#yourScore");
             const $highScore = $("#highScore");
             $yourScore.html(this.score.yourScore);
-
         }
 
     }

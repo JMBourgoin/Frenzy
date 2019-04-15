@@ -60,6 +60,10 @@ window.addEventListener('click', function(e) {
         game.board.sounds.playQuit();
         game.board.gameOver();
         game.stop();
+    } else if ( x > 97 && x < 159 && y > 368 && y < 420){
+        console.log('radioactive');
+        game.board.radioActive.handleClick(e);
+
     } else if (x > 449 && x < 511 && y > 46 && y < 70){
         console.log('jmb');
         window.open('https://jmbourgoin.com');

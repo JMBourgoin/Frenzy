@@ -4,10 +4,16 @@ class Score {
         this.lives = 6;
         this.level = 1;
         this.levelCount = 0;
+        this.radioactive = false;
         this.yourScore = 0;
 
         this.addPoints = this.addPoints.bind(this);
         this.takeLife = this.takeLife.bind(this);
+        this.deactivateRadioactive = this.deactivateRadioactive.bind(this);
+    }
+
+    isRadioactive(){
+        return this.radioactive;
     }
 
     addLife(){
@@ -18,8 +24,15 @@ class Score {
         this.lives -= 1;
     }
 
+    deactivateRadioactive(){
+        this.radioactive = false;
+    }
+
     addLevel(){
         this.level += 1;
+        if(this.radioactive === false){
+            this.radioactive = true;
+        }
     }
 
     addPoints(points){
