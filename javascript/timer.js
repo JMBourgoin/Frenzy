@@ -16,8 +16,11 @@ class Timer {
     incrementInterval(){
         if(this.score.level === 1){
             return this.x += 0.025;
+        } else if (this.score.level > 1 && this.score.level <= 4){
+            const multiplier = this.score.level * 0.65;
+            return this.x += multiplier * 0.025;
         } else {
-            const multiplier = this.score.level * 0.75;
+            const multiplier = this.score.level * 0.55;
             return this.x += multiplier * 0.025;
         }
     }

@@ -163,6 +163,9 @@ window.addEventListener('click', function (e) {
   } else if (x > 97 && x < 159 && y > 368 && y < 420) {
     console.log('radioactive');
     game.board.radioActive.handleClick(e);
+  } else if (x > 459 && x < 515 && y > 124 && y < 186) {
+    console.log('5x');
+    game.board.five.handleClick(e);
   } else if (x > 449 && x < 511 && y > 46 && y < 70) {
     console.log('jmb');
     window.open('https://jmbourgoin.com');
@@ -205,11 +208,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _radioactive__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./radioactive */ "./javascript/radioactive.js");
+/* harmony import */ var _five__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./five */ "./javascript/five.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -244,6 +249,8 @@ function () {
     var pieShop = [this.topPie, this.bottomPie, this.leftTopPie, this.leftBottomPie, this.rightTopPie, this.rightBottomPie];
     this.radioActive = new _radioactive__WEBPACK_IMPORTED_MODULE_7__["default"](103, 373, pieShop, this.center, this.score);
     this.radioActive.generateImage();
+    this.five = new _five__WEBPACK_IMPORTED_MODULE_8__["default"](458, 128, this.center, this.score);
+    this.five.generateImage();
   }
 
   _createClass(Board, [{
@@ -282,6 +289,7 @@ function () {
       this.rightTopPie.render();
       this.rightBottomPie.render();
       this.radioActive.render();
+      this.five.render();
 
       if (this.score.gameOver()) {
         this.sounds.playGameOver();
@@ -406,6 +414,69 @@ function () {
 
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Center);
+
+/***/ }),
+
+/***/ "./javascript/five.js":
+/*!****************************!*\
+  !*** ./javascript/five.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Five =
+/*#__PURE__*/
+function () {
+  function Five(x, y, center, score) {
+    _classCallCheck(this, Five);
+
+    this.image = '';
+    this.x = x;
+    this.y = y;
+    this.center = center;
+    this.score = score;
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  _createClass(Five, [{
+    key: "generateImage",
+    value: function generateImage() {
+      var img = new Image();
+      img.src = "./app/assets/images/5x.png";
+      this.image = img;
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
+      this.score.addFive();
+      this.score.deactivateFive();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.score.isFive()) {
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var x = this.x;
+        var y = this.y;
+        return ctx.drawImage(this.image, x, y);
+      }
+    }
+  }]);
+
+  return Five;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Five);
 
 /***/ }),
 
@@ -746,7 +817,9 @@ function () {
     this.level = 1;
     this.levelCount = 0;
     this.radioactive = false;
+    this.five = false;
     this.yourScore = 0;
+    this.fiveScore = 0;
     this.addPoints = this.addPoints.bind(this);
     this.takeLife = this.takeLife.bind(this);
     this.deactivateRadioactive = this.deactivateRadioactive.bind(this);
@@ -756,6 +829,16 @@ function () {
     key: "isRadioactive",
     value: function isRadioactive() {
       return this.radioactive;
+    }
+  }, {
+    key: "isFive",
+    value: function isFive() {
+      return this.five;
+    }
+  }, {
+    key: "addFive",
+    value: function addFive() {
+      this.lives += 5;
     }
   }, {
     key: "addLife",
@@ -773,6 +856,11 @@ function () {
       this.radioactive = false;
     }
   }, {
+    key: "deactivateFive",
+    value: function deactivateFive() {
+      this.five = false;
+    }
+  }, {
     key: "addLevel",
     value: function addLevel() {
       this.level += 1;
@@ -785,12 +873,17 @@ function () {
     key: "addPoints",
     value: function addPoints(points) {
       this.score += points;
+      this.fiveScore += points;
       this.levelCount += points;
 
       if (this.levelCount >= 50) {
         this.levelCount = 0;
         this.addLevel();
         this.addLife();
+      }
+
+      if (this.score > 200 && this.score < 230 && !this.isFive() || this.score > 500 && this.score < 600 && !this.isFive()) {
+        this.five = true;
       }
     }
   }, {
@@ -969,9 +1062,13 @@ function () {
     value: function incrementInterval() {
       if (this.score.level === 1) {
         return this.x += 0.025;
-      } else {
-        var multiplier = this.score.level * 0.75;
+      } else if (this.score.level > 1 && this.score.level <= 4) {
+        var multiplier = this.score.level * 0.65;
         return this.x += multiplier * 0.025;
+      } else {
+        var _multiplier = this.score.level * 0.55;
+
+        return this.x += _multiplier * 0.025;
       }
     }
   }, {

@@ -6,6 +6,7 @@ import Score from './score';
 import SoundCollection from './soundCollection';
 import $ from 'jquery';
 import RadioActive from './radioactive';
+import Five from './five';
 
 class Board {
     constructor(stop){
@@ -27,6 +28,8 @@ class Board {
         const pieShop = [this.topPie, this.bottomPie, this.leftTopPie, this.leftBottomPie, this.rightTopPie, this.rightBottomPie];
         this.radioActive = new RadioActive(103, 373, pieShop, this.center, this.score);
         this.radioActive.generateImage();
+        this.five = new Five (458, 128, this.center, this.score);
+        this.five.generateImage();
         
     }
 
@@ -62,6 +65,7 @@ class Board {
         this.rightTopPie.render();
         this.rightBottomPie.render();
         this.radioActive.render();
+        this.five.render();
         if(this.score.gameOver()){
             this.sounds.playGameOver();
             this.gameOver();

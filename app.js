@@ -30,46 +30,62 @@ window.addEventListener('click', function(e) {
     if (x > 318 && x < 458 && y >106 && y < 244){
         console.log('click1');
         game.board.handleClick(e, topPie);
+
     } else if (x > 318 && x < 458 && y > 536 && y < 681){
         console.log('click4');
+
         game.board.handleClick(e, bottomPie);
     } else if(x > 317 && x < 459 && y > 311 && y < 458 && gameOver.className === 'hide'){
         console.log("center");
         game.board.handleClick(e, center);
+
     } else if (gameOver.className === "game-over-modal" && x > 360 && x < 396 && y > 439 && y < 479) {
           gameOver.className = "hide";
           game.board.sounds.pauseAll();
+
     } else if (x > 114 && x < 257 && y > 214 && y < 357){
         console.log('click6');
+
         game.board.handleClick(e, leftTopPie);
     } else if (x > 114 && x < 257 && y > 407 && y < 550){
         console.log('click5');
+
         game.board.handleClick(e, leftBottomPie);
     } else if (x > 518 && x < 661 && y > 214 && y < 357){
         console.log('click2');
+
         game.board.handleClick(e, rightTopPie);
     } else if ( x > 518 && x < 661 && y > 407 && y < 550){
         console.log('click3');
+
         game.board.handleClick(e, rightBottomPie);
     } else if ( x > 171 && x < 225 && y > 98 && y < 150){
         console.log('start');
         game.board.sounds.playStart();
         game.start();
+
     }else if ( x > 235 && x < 287 && y > 61 && y < 114){
         console.log('stop');
         game.board.sounds.playQuit();
         game.board.gameOver();
         game.stop();
+
     } else if ( x > 97 && x < 159 && y > 368 && y < 420){
         console.log('radioactive');
         game.board.radioActive.handleClick(e);
 
+    } else if ( x > 459 && x < 515 && y > 124 && y <186){
+        console.log('5x');
+        game.board.five.handleClick(e);
+
     } else if (x > 449 && x < 511 && y > 46 && y < 70){
         console.log('jmb');
         window.open('https://jmbourgoin.com');
+
     } else if (x > 532 && x < 562 && y > 65 && y < 95){
         console.log('github');
         window.open('https://github.com/jmbourgoin');
+        
     } else if (x > 582 && x < 609 && y > 102 && y < 130){
         console.log('insta');
         window.open('https://www.instagram.com/jmb.shots/');

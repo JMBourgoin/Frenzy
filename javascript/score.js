@@ -5,7 +5,9 @@ class Score {
         this.level = 1;
         this.levelCount = 0;
         this.radioactive = false;
+        this.five = false;
         this.yourScore = 0;
+        this.fiveScore = 0;
 
         this.addPoints = this.addPoints.bind(this);
         this.takeLife = this.takeLife.bind(this);
@@ -14,6 +16,14 @@ class Score {
 
     isRadioactive(){
         return this.radioactive;
+    }
+
+    isFive(){
+        return this.five;
+    }
+
+    addFive(){
+        this.lives += 5;
     }
 
     addLife(){
@@ -28,6 +38,10 @@ class Score {
         this.radioactive = false;
     }
 
+    deactivateFive(){
+        this.five = false;
+    }
+
     addLevel(){
         this.level += 1;
         if(this.radioactive === false){
@@ -37,12 +51,16 @@ class Score {
 
     addPoints(points){
         this.score += points;
+        this.fiveScore += points;
         this.levelCount += points;
     
         if(this.levelCount >= 50){
             this.levelCount = 0;
             this.addLevel();
             this.addLife();
+        }
+        if((this.score > 200 && this.score < 230 && !this.isFive()) || (this.score > 500 && this.score < 600 && !this.isFive())){
+            this.five = true;
         }
     }
 
