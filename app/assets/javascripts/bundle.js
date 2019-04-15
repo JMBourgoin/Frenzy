@@ -154,9 +154,11 @@ window.addEventListener('click', function (e) {
     game.board.handleClick(e, rightBottomPie);
   } else if (x > 171 && x < 225 && y > 98 && y < 150) {
     console.log('start');
+    game.board.sounds.playStart();
     game.start();
   } else if (x > 235 && x < 287 && y > 61 && y < 114) {
     console.log('stop');
+    game.board.sounds.playQuit();
     game.board.gameOver();
     game.stop();
   }
@@ -263,6 +265,7 @@ function () {
       this.rightBottomPie.render();
 
       if (this.score.gameOver()) {
+        this.sounds.playGameOver();
         this.gameOver();
         this.stop();
         var gameOver = document.getElementById("gameOver");
@@ -752,12 +755,24 @@ function () {
     this.pieWedge = "";
     this.clear = '';
     this.center = '';
+    this.quit = '';
+    this.gameOver = '';
     this.playCenter = this.playCenter.bind(this);
     this.playPieWedge = this.playPieWedge.bind(this);
     this.playClear = this.playClear.bind(this);
   }
 
   _createClass(SoundCollection, [{
+    key: "playStart",
+    value: function playStart() {
+      this.start.play();
+    }
+  }, {
+    key: "playQuit",
+    value: function playQuit() {
+      this.quit.play();
+    }
+  }, {
     key: "playPieWedge",
     value: function playPieWedge() {
       this.pieWedge.play();
@@ -773,9 +788,17 @@ function () {
       this.center.play();
     }
   }, {
+    key: "playGameOver",
+    value: function playGameOver() {
+      this.gameOver.play();
+    }
+  }, {
     key: "pauseAll",
     value: function pauseAll() {
       this.pieWedge.pause();
+      this.gameOver.pause();
+      this.clear.pause();
+      this.center.pause();
     }
   }, {
     key: "createSounds",
@@ -786,6 +809,12 @@ function () {
       this.clear.src = "./app/assets/sounds/pie-clear.mp3";
       this.center = document.createElement("audio");
       this.center.src = "./app/assets/sounds/center-click.mp3";
+      this.quit = document.createElement("audio");
+      this.quit.src = "./app/assets/sounds/quit.mp3";
+      this.start = document.createElement("audio");
+      this.start.src = "./app/assets/sounds/start.mp3";
+      this.gameOver = document.createElement("audio");
+      this.gameOver.src = "./app/assets/sounds/gameover.mp3";
     }
   }]);
 
@@ -847,13 +876,13 @@ function () {
       var color = '';
 
       if (this.x < 1) {
-        color = 'rgb(0,255,0,.5)';
+        color = 'rgb(0,255,0,.3)';
         this.render(this.x, color);
       } else if (this.x < 1.6 && this.x > .7) {
-        color = "rgb(204,0,255,.5)";
+        color = "rgb(204,0,255,.3)";
         this.render(this.x, color);
       } else if (this.x <= 2) {
-        color = "rgb(255,0,0,.8)";
+        color = "rgb(255,0,0,.5)";
         this.render(this.x, color);
       } else {
         this.score.takeLife();

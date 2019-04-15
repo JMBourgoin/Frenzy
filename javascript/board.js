@@ -56,6 +56,7 @@ class Board {
         this.rightTopPie.render();
         this.rightBottomPie.render();
         if(this.score.gameOver()){
+            this.sounds.playGameOver();
             this.gameOver();
             this.stop();
             const gameOver = document.getElementById("gameOver");

@@ -3,10 +3,21 @@ class SoundCollection {
         this.pieWedge = "";
         this.clear = '';
         this.center = '';
+        this.quit = '';
+        this.gameOver = '';
         this.playCenter = this.playCenter.bind(this);
         this.playPieWedge = this.playPieWedge.bind(this);
         this.playClear = this.playClear.bind(this);
+        this.gameOver = this.gameOver.bind(this);
     }
+    playStart(){
+        this.start.play();
+    }
+
+    playQuit(){
+        this.quit.play();
+    }
+
     playPieWedge(){
         this.pieWedge.play();
     }
@@ -19,8 +30,17 @@ class SoundCollection {
         this.center.play();
     }
 
+    playGameOver(){
+        this.gameOver.play();
+    }
+
     pauseAll(){
         this.pieWedge.pause();
+        this.gameOver.pause();
+        this.gameOver.src = '';
+        this.gameOver.src = "./app/assets/sounds/gameover.mp3";
+        this.clear.pause();
+        this.center.pause();
     }
 
     createSounds(){
@@ -32,6 +52,15 @@ class SoundCollection {
 
         this.center = document.createElement("audio");
         this.center.src = "./app/assets/sounds/center-click.mp3";
+
+         this.quit = document.createElement("audio");
+         this.quit.src = "./app/assets/sounds/quit.mp3";
+
+         this.start = document.createElement("audio");
+         this.start.src = "./app/assets/sounds/start.mp3";
+
+         this.gameOver = document.createElement("audio");
+         this.gameOver.src = "./app/assets/sounds/gameover.mp3";
     }
 }
 

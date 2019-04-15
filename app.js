@@ -38,6 +38,7 @@ window.addEventListener('click', function(e) {
         game.board.handleClick(e, center);
         if (gameOver.className === "game-over-modal") {
           gameOver.className = "hide";
+          game.board.sounds.pauseAll();
         }
     } else if (x > 114 && x < 257 && y > 214 && y < 357){
         console.log('click6');
@@ -53,9 +54,11 @@ window.addEventListener('click', function(e) {
         game.board.handleClick(e, rightBottomPie);
     } else if ( x > 171 && x < 225 && y > 98 && y < 150){
         console.log('start');
+        game.board.sounds.playStart();
         game.start();
     }else if ( x > 235 && x < 287 && y > 61 && y < 114){
         console.log('stop');
+        game.board.sounds.playQuit();
         game.board.gameOver();
         game.stop();
     }
