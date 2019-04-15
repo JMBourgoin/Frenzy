@@ -67,7 +67,7 @@ class Score {
             this.radioactive = true;
             this.radioActiveCount = 0;
         }
-        if(this.totalLevels % 7 === 0 && this.hourglass === false){
+        if(this.totalLevels % 6 === 0 && this.hourglass === false){
             this.hourglass = true;
         }
 
