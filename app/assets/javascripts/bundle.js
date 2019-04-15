@@ -133,13 +133,12 @@ window.addEventListener('click', function (e) {
   } else if (x > 318 && x < 458 && y > 536 && y < 681) {
     console.log('click4');
     game.board.handleClick(e, bottomPie);
-  } else if (x > 317 && x < 459 && y > 311 && y < 458) {
+  } else if (x > 317 && x < 459 && y > 311 && y < 458 && gameOver.className === 'hide') {
     console.log("center");
     game.board.handleClick(e, center);
-
-    if (gameOver.className === "game-over-modal") {
-      gameOver.className = "hide";
-    }
+  } else if (gameOver.className === "game-over-modal" && x > 360 && x < 396 && y > 439 && y < 479) {
+    gameOver.className = "hide";
+    game.board.sounds.pauseAll();
   } else if (x > 114 && x < 257 && y > 214 && y < 357) {
     console.log('click6');
     game.board.handleClick(e, leftTopPie);
@@ -161,17 +160,27 @@ window.addEventListener('click', function (e) {
     game.board.sounds.playQuit();
     game.board.gameOver();
     game.stop();
+  } else if (x > 449 && x < 511 && y > 46 && y < 70) {
+    console.log('jmb');
+    window.open('https://jmbourgoin.com');
+  } else if (x > 532 && x < 562 && y > 65 && y < 95) {
+    console.log('github');
+    window.open('https://github.com/jmbourgoin');
+  } else if (x > 582 && x < 609 && y > 102 && y < 130) {
+    console.log('insta');
+    window.open('https://www.instagram.com/jmb.shots/');
   }
 }); // Code snippet to provide an x,y coordinate to print 
 // on the console relative to the game board.  Accounts 
 // for thewindow size.
-// window.addEventListener('mousemove', function(e){
-//     e.preventDefault();
-//     let x = (e.pageX - xmargin);
-//     let y = (e.pageY -ymargin);
-//     console.log('x: ' + x);
-//     console.log('y: ' + y);
-// });
+
+window.addEventListener('mousemove', function (e) {
+  e.preventDefault();
+  var x = e.pageX - xmargin;
+  var y = e.pageY - ymargin;
+  console.log('x: ' + x);
+  console.log('y: ' + y);
+});
 
 /***/ }),
 
@@ -219,7 +228,7 @@ function () {
     this.sounds.createSounds();
     this.center = new _center__WEBPACK_IMPORTED_MODULE_3__["default"](388, 383, this.wedges);
     this.score = new _score__WEBPACK_IMPORTED_MODULE_4__["default"]();
-    this.timer = new _timer__WEBPACK_IMPORTED_MODULE_2__["default"](this.center, this.score);
+    this.timer = new _timer__WEBPACK_IMPORTED_MODULE_2__["default"](this.center, this.score, this.sounds);
     this.topPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 173, this.center, this.score);
     this.bottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 605, this.center, this.score);
     this.leftTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](185, 283, this.center, this.score);
@@ -250,6 +259,7 @@ function () {
       this.rightTopPie.newGame();
       this.rightBottomPie.newGame();
       this.timer.reset();
+      this.stop();
     }
   }, {
     key: "render",
@@ -760,6 +770,7 @@ function () {
     this.playCenter = this.playCenter.bind(this);
     this.playPieWedge = this.playPieWedge.bind(this);
     this.playClear = this.playClear.bind(this);
+    this.playGameOver = this.playGameOver.bind(this);
   }
 
   _createClass(SoundCollection, [{
@@ -797,6 +808,8 @@ function () {
     value: function pauseAll() {
       this.pieWedge.pause();
       this.gameOver.pause();
+      this.gameOver.src = '';
+      this.gameOver.src = "./app/assets/sounds/gameover.mp3";
       this.clear.pause();
       this.center.pause();
     }
@@ -846,9 +859,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Timer =
 /*#__PURE__*/
 function () {
-  function Timer(center, score) {
+  function Timer(center, score, sounds) {
     _classCallCheck(this, Timer);
 
+    this.sounds = sounds;
     this.score = score;
     this.center = center;
     this.canvas = document.getElementById("myCanvas");
@@ -887,6 +901,7 @@ function () {
       } else {
         this.score.takeLife();
         this.center.addWedge();
+        this.sounds.playCenter();
         this.x = 0;
       }
 

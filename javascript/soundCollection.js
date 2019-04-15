@@ -8,7 +8,7 @@ class SoundCollection {
         this.playCenter = this.playCenter.bind(this);
         this.playPieWedge = this.playPieWedge.bind(this);
         this.playClear = this.playClear.bind(this);
-        this.gameOver = this.gameOver.bind(this);
+        this.playGameOver = this.playGameOver.bind(this);
     }
     playStart(){
         this.start.play();

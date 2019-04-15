@@ -15,7 +15,7 @@ class Board {
         this.sounds.createSounds();
         this.center = new Center(388, 383, this.wedges);
         this.score = new Score();
-        this.timer = new Timer(this.center, this.score);
+        this.timer = new Timer(this.center, this.score, this.sounds);
         this.topPie = new Pie(388, 173, this.center, this.score);
         this.bottomPie = new Pie(388, 605, this.center, this.score);
         this.leftTopPie = new Pie(185, 283, this.center, this.score);
@@ -43,6 +43,7 @@ class Board {
         this.rightTopPie.newGame();
         this.rightBottomPie.newGame();
         this.timer.reset();
+        this.stop();
     }
 
     render(){

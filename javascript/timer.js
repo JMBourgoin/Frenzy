@@ -1,7 +1,8 @@
 import Center from "./center";
 
 class Timer {
-    constructor (center, score) {
+    constructor (center, score, sounds) {
+        this.sounds = sounds;
         this.score = score;
         this.center = center;
         this.canvas = document.getElementById("myCanvas");
@@ -36,6 +37,7 @@ class Timer {
         } else {
             this.score.takeLife();
             this.center.addWedge();
+            this.sounds.playCenter();
             this.x = 0;
         }
         this.incrementInterval();
