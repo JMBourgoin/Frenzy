@@ -963,16 +963,20 @@ function () {
     key: "addLevel",
     value: function addLevel() {
       this.level += 1;
-      this.sandsTime += 1;
+      this.totalLevels += 1;
       this.radioActiveCount += 0.5;
 
-      if (this.radioActiveCount === 1 && this.radioactive === false) {
+      if (this.radioActiveCount === 1) {
         this.radioactive = true;
         this.radioActiveCount = 0;
       }
 
-      if (this.sandsTime % 7 === 0 && this.hourglass === false) {
+      if (this.totalLevels % 7 === 0 && this.hourglass === false) {
         this.hourglass = true;
+      }
+
+      if (this.totalLevels % 5 === 0 && this.five === false) {
+        this.five = true;
       }
     }
   }, {
@@ -986,10 +990,6 @@ function () {
         this.levelCount = 0;
         this.addLevel();
         this.addLife();
-      }
-
-      if (this.score > 200 && this.score < 230 && !this.isFive() || this.score > 500 && this.score < 530 && !this.isFive()) {
-        this.five = true;
       }
     }
   }, {
