@@ -87,15 +87,17 @@ class Pie {
         }
     }
     
-    handleClick(e, timer){
+    handleClick(e, timer, score, sounds){
         e.preventDefault();
         let wedge = this.center.wedge[0];
         if(this.wedgeValid(wedge)){
             timer.reset();
             this.addWedge(wedge);
+            sounds.playPieWedge();
         }
         if(this.full()){
             this.clear();
+            sounds.playClear();
         }
     }
 

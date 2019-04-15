@@ -2,6 +2,7 @@ import Pie from './javascript/pie';
 import Board from './javascript/board';
 import Timer from './javascript/timer';
 import Game from './javascript/game';
+import jquery from 'jquery';
 
 const game = new Game();
 // -----------------------------------------------------
@@ -24,16 +25,20 @@ window.addEventListener('click', function(e) {
     const leftBottomPie = game.board.leftBottomPie;
     const rightTopPie = game.board.rightTopPie;
     const rightBottomPie = game.board.rightBottomPie;
+    const center = game.board.center;
 
     if (x > 318 && x < 458 && y >106 && y < 244){
         console.log('click1');
         game.board.handleClick(e, topPie);
     } else if (x > 318 && x < 458 && y > 536 && y < 681){
         console.log('click4');
-        if(gameOver.className === "game-over-modal"){
-            gameOver.className = "hide";
-        }
         game.board.handleClick(e, bottomPie);
+    } else if(x > 317 && x < 459 && y > 311 && y < 458){
+        console.log("center");
+        game.board.handleClick(e, center);
+        if (gameOver.className === "game-over-modal") {
+          gameOver.className = "hide";
+        }
     } else if (x > 114 && x < 257 && y > 214 && y < 357){
         console.log('click6');
         game.board.handleClick(e, leftTopPie);
@@ -55,8 +60,12 @@ window.addEventListener('click', function(e) {
         game.stop();
     }
 });
-
-// Code snippet to provide an x,y coordinate to print on the console relative to the game board.  Accounts for window size.
+  
+                                        
+                                    
+// Code snippet to provide an x,y coordinate to print 
+// on the console relative to the game board.  Accounts 
+// for thewindow size.
 
 // window.addEventListener('mousemove', function(e){
 //     e.preventDefault();

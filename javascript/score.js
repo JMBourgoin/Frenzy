@@ -4,6 +4,7 @@ class Score {
         this.lives = 6;
         this.level = 1;
         this.levelCount = 0;
+        this.yourScore = 0;
 
         this.addPoints = this.addPoints.bind(this);
         this.takeLife = this.takeLife.bind(this);
@@ -31,8 +32,9 @@ class Score {
             this.addLife();
         }
     }
-    
+
     newGame(){
+        this.yourScore = this.score;
         this.score = 0;
         this.lives = 6;
         this.level = 1;

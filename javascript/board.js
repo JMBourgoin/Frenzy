@@ -3,12 +3,16 @@ import Pie from './pie';
 import Timer from './timer';
 import Center from './center';
 import Score from './score';
+import SoundCollection from './soundCollection';
+import $ from 'jquery';
 
 class Board {
     constructor(stop){
         this.stop = stop;
         this.wedges = new WedgeCollection();
         this.wedges.createWedges();
+        this.sounds = new SoundCollection();
+        this.sounds.createSounds();
         this.center = new Center(388, 383, this.wedges);
         this.score = new Score();
         this.timer = new Timer(this.center, this.score);
@@ -23,10 +27,11 @@ class Board {
 
     handleClick(e, pie, game){
         let timer = this.timer;
-        let wedges = this.wedges;
+        let sounds = this.sounds;
+        let score = this.score;
         e.preventDefault();
         e.stopPropagation();
-        pie.handleClick(e, timer, game);
+        pie.handleClick(e, timer, score, sounds);
     }
 
     gameOver(){
@@ -55,6 +60,10 @@ class Board {
             this.stop();
             const gameOver = document.getElementById("gameOver");
             gameOver.className = "game-over-modal";
+            const $yourScore = $("#yourScore");
+            const $highScore = $("#highScore");
+            $yourScore.html(this.score.yourScore);
+
         }
 
     }

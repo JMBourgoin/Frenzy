@@ -19,12 +19,14 @@ class Center {
         this.addWedge = this.addWedge.bind(this);
         }
     
-    handleClick(e){
+    handleClick(e, timer, score, sounds){
         e.preventDefault();
         e.stopPropagation();
+        timer.reset();
+        score.takeLife();
+        sounds.playCenter();
+        }
 
-    }
-    
     addWedge(){
         this.wedge = [];
         let newWedge = this.wedges.randomWedge();
