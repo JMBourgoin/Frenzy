@@ -27,15 +27,15 @@ window.addEventListener('click', function(e) {
     const rightBottomPie = game.board.rightBottomPie;
     const center = game.board.center;
 
-    if (x > 318 && x < 458 && y >106 && y < 244){
+    if (x > 318 && x < 458 && y >96 && y < 238){
         console.log('click1');
         game.board.handleClick(e, topPie);
 
-    } else if (x > 318 && x < 458 && y > 536 && y < 681){
+    } else if (x > 318 && x < 458 && y > 518 && y < 657){
         console.log('click4');
-
         game.board.handleClick(e, bottomPie);
-    } else if(x > 317 && x < 459 && y > 311 && y < 458 && gameOver.className === 'hide'){
+
+    } else if(x > 317 && x < 459 && y > 308 && y < 437 && gameOver.className === 'hide'){
         console.log("center");
         game.board.handleClick(e, center);
 
@@ -43,63 +43,66 @@ window.addEventListener('click', function(e) {
           gameOver.className = "hide";
           game.board.sounds.pauseAll();
 
-    } else if (x > 114 && x < 257 && y > 214 && y < 357){
+    } else if (x > 114 && x < 257 && y > 198 && y < 348){
         console.log('click6');
-
         game.board.handleClick(e, leftTopPie);
-    } else if (x > 114 && x < 257 && y > 407 && y < 550){
+
+    } else if (x > 128 && x < 257 && y > 399 && y < 540){
         console.log('click5');
-
         game.board.handleClick(e, leftBottomPie);
-    } else if (x > 518 && x < 661 && y > 214 && y < 357){
+
+    } else if (x > 518 && x < 661 && y > 198 && y < 348){
         console.log('click2');
-
         game.board.handleClick(e, rightTopPie);
-    } else if ( x > 518 && x < 661 && y > 407 && y < 550){
-        console.log('click3');
 
+    } else if ( x > 507 && x < 633 && y > 411 && y < 535){
+        console.log('click3');
         game.board.handleClick(e, rightBottomPie);
-    } else if ( x > 171 && x < 225 && y > 98 && y < 150){
+
+    } else if ( x > 177 && x < 230 && y > 91 && y < 141){
         console.log('start');
         game.board.sounds.playStart();
         game.start();
 
-    }else if ( x > 235 && x < 287 && y > 61 && y < 114){
+    }else if ( x > 239 && x < 290 && y > 61 && y < 114){
         console.log('stop');
         game.board.sounds.playQuit();
         game.board.gameOver();
         game.stop();
 
-    } else if ( x > 97 && x < 159 && y > 368 && y < 420){
-        if(game.board.score.isRadioactive()){
+    } else if ( x > 107 && x < 164 && y > 360 && y < 413){
             console.log('radioactive');
+        if(game.board.score.isRadioactive()){
             game.board.radioActive.handleClick(e);
             game.board.sounds.playRadioactive();
         }
 
-    } else if ( x > 459 && x < 515 && y > 124 && y <186){
+    } else if ( x > 455 && x < 511 && y > 121 && y <178){
+        console.log('5x');
         if(game.board.score.isFive()){
-            console.log('5x');
             game.board.five.handleClick(e);
             game.board.sounds.playFiveX();
         }
 
-    } else if ( x > 619 && x < 683 && y > 367 && y < 423){
+    } else if ( x > 619 && x < 673 && y > 356 && y < 414){
+        console.log('hourglass');
         if(game.board.score.isHourglass()){
-            console.log('hourglass');
             game.board.hourglass.handleClick(e);
         }
-    } else if (x > 449 && x < 511 && y > 46 && y < 70){
+    } else if (x > 452 && x < 507 && y > 46 && y < 70){
         console.log('jmb');
         window.open('https://jmbourgoin.com');
 
-    } else if (x > 532 && x < 562 && y > 65 && y < 95){
+    } else if (x > 528 && x < 558 && y > 64 && y < 92){
         console.log('github');
         window.open('https://github.com/jmbourgoin');
 
-    } else if (x > 582 && x < 609 && y > 102 && y < 130){
+    } else if (x > 576 && x < 605 && y > 98 && y < 126){
         console.log('insta');
         window.open('https://www.instagram.com/jmb.shots/');
+    } else if (x > 616 && x < 645 && y > 141 && y < 168){
+        console.log('linked-in');
+        window.open('https://www.linkedin.com/in/jason-bourgoin-060a6a116/')
     }
 });
   

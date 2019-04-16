@@ -36,7 +36,7 @@ a {
 /* CSS RESET -----------------------------------------------------------------------------------*/
 
 #root {
-    background-image: url('../app/assets/images/frenzyboard.svg');
+    background-image: url('../app/assets/images/frenzy-board.svg');
     background-repeat: no-repeat;
     background-position: center;
 }

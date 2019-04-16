@@ -17,22 +17,22 @@ class Board {
         this.wedges.createWedges();
         this.sounds = new SoundCollection();
         this.sounds.createSounds();
-        this.center = new Center(388, 383, this.wedges);
+        this.center = new Center(388, 373.5, this.wedges);
         this.score = new Score();
         this.timer = new Timer(this.center, this.score, this.sounds);
-        this.topPie = new Pie(388, 173, this.center, this.score);
-        this.bottomPie = new Pie(388, 605, this.center, this.score);
-        this.leftTopPie = new Pie(185, 283, this.center, this.score);
-        this.leftBottomPie = new Pie(185, 475, this.center, this.score);
-        this.rightTopPie = new Pie(589, 283, this.center, this.score);
-        this.rightBottomPie = new Pie(590, 475, this.center, this.score);
+        this.topPie = new Pie(388, 168, this.center, this.score);
+        this.bottomPie = new Pie(388, 589, this.center, this.score);
+        this.leftTopPie = new Pie(191, 275, this.center, this.score);
+        this.leftBottomPie = new Pie(191, 462, this.center, this.score);
+        this.rightTopPie = new Pie(584, 275, this.center, this.score);
+        this.rightBottomPie = new Pie(584, 462, this.center, this.score);
         this.handleClick = this.handleClick.bind(this);
         const pieShop = [this.topPie, this.bottomPie, this.leftTopPie, this.leftBottomPie, this.rightTopPie, this.rightBottomPie];
-        this.radioActive = new RadioActive(103, 373, pieShop, this.center, this.score);
+        this.radioActive = new RadioActive(110, 363, pieShop, this.center, this.score);
         this.radioActive.generateImage();
-        this.five = new Five (458, 128, this.center, this.score);
+        this.five = new Five (453, 123, this.center, this.score);
         this.five.generateImage();
-        this.hourglass = new Hourglass(626, 371, this.center, this.score);
+        this.hourglass = new Hourglass(618, 362, this.center, this.score);
         this.hourglass.generateImage();
     }
 
@@ -55,6 +55,9 @@ class Board {
         this.rightBottomPie.newGame();
         this.timer.reset();
         this.stop();
+        this.score.deactivateFive();
+        this.score.deactivateRadioactive();
+        this.score.deactivateHourglass();
     }
 
     render(){

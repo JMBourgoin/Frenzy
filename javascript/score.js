@@ -4,6 +4,7 @@ class Score {
         this.lives = 6;
         this.level = 1;
         this.levelCount = 0;
+        this.totalLevels = 0;
         this.radioactive = false;
         this.five = false;
         this.hourglass = false;
@@ -35,7 +36,7 @@ class Score {
     }
 
     rewindTime(){
-        this.level -= 2;
+        this.level -= 5;
     }
 
     addLife(){
@@ -62,16 +63,17 @@ class Score {
         this.level += 1;
         this.totalLevels += 1;
         this.radioActiveCount += 0.5;
-
+        
+        debugger
         if(this.radioActiveCount === 1){
             this.radioactive = true;
             this.radioActiveCount = 0;
         }
-        if(this.totalLevels % 5 === 0 && this.hourglass === false){
+        if(this.totalLevels % 8 === 0){
             this.hourglass = true;
         }
 
-        if(this.totalLevels % 4 === 0 && this.five === false){
+        if(this.totalLevels % 5 === 0){
             this.five = true;
         }
     }
@@ -107,14 +109,14 @@ class Score {
         ctx.fillStyle = 'white';
         ctx.textAlign = 'center';
         ctx.font = "22px Arial";
-        ctx.fillText(this.lives, 212, 670);
+        ctx.fillText(this.lives, 215, 652);
 
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
         ctx.fillStyle = 'white';
         ctx.textAlign = 'center';
         ctx.font = "22px Arial";
-        ctx.fillText(this.score, 568, 670);
+        ctx.fillText(this.score, 564, 652);
     }
 }
 

@@ -127,65 +127,71 @@ window.addEventListener('click', function (e) {
   var rightBottomPie = game.board.rightBottomPie;
   var center = game.board.center;
 
-  if (x > 318 && x < 458 && y > 106 && y < 244) {
+  if (x > 318 && x < 458 && y > 96 && y < 238) {
     console.log('click1');
     game.board.handleClick(e, topPie);
-  } else if (x > 318 && x < 458 && y > 536 && y < 681) {
+  } else if (x > 318 && x < 458 && y > 518 && y < 657) {
     console.log('click4');
     game.board.handleClick(e, bottomPie);
-  } else if (x > 317 && x < 459 && y > 311 && y < 458 && gameOver.className === 'hide') {
+  } else if (x > 317 && x < 459 && y > 308 && y < 437 && gameOver.className === 'hide') {
     console.log("center");
     game.board.handleClick(e, center);
   } else if (gameOver.className === "game-over-modal" && x > 360 && x < 396 && y > 439 && y < 479) {
     gameOver.className = "hide";
     game.board.sounds.pauseAll();
-  } else if (x > 114 && x < 257 && y > 214 && y < 357) {
+  } else if (x > 114 && x < 257 && y > 198 && y < 348) {
     console.log('click6');
     game.board.handleClick(e, leftTopPie);
-  } else if (x > 114 && x < 257 && y > 407 && y < 550) {
+  } else if (x > 128 && x < 257 && y > 399 && y < 540) {
     console.log('click5');
     game.board.handleClick(e, leftBottomPie);
-  } else if (x > 518 && x < 661 && y > 214 && y < 357) {
+  } else if (x > 518 && x < 661 && y > 198 && y < 348) {
     console.log('click2');
     game.board.handleClick(e, rightTopPie);
-  } else if (x > 518 && x < 661 && y > 407 && y < 550) {
+  } else if (x > 507 && x < 633 && y > 411 && y < 535) {
     console.log('click3');
     game.board.handleClick(e, rightBottomPie);
-  } else if (x > 171 && x < 225 && y > 98 && y < 150) {
+  } else if (x > 177 && x < 230 && y > 91 && y < 141) {
     console.log('start');
     game.board.sounds.playStart();
     game.start();
-  } else if (x > 235 && x < 287 && y > 61 && y < 114) {
+  } else if (x > 239 && x < 290 && y > 61 && y < 114) {
     console.log('stop');
     game.board.sounds.playQuit();
     game.board.gameOver();
     game.stop();
-  } else if (x > 97 && x < 159 && y > 368 && y < 420) {
+  } else if (x > 107 && x < 164 && y > 360 && y < 413) {
+    console.log('radioactive');
+
     if (game.board.score.isRadioactive()) {
-      console.log('radioactive');
       game.board.radioActive.handleClick(e);
       game.board.sounds.playRadioactive();
     }
-  } else if (x > 459 && x < 515 && y > 124 && y < 186) {
+  } else if (x > 455 && x < 511 && y > 121 && y < 178) {
+    console.log('5x');
+
     if (game.board.score.isFive()) {
-      console.log('5x');
       game.board.five.handleClick(e);
       game.board.sounds.playFiveX();
     }
-  } else if (x > 619 && x < 683 && y > 367 && y < 423) {
+  } else if (x > 619 && x < 673 && y > 356 && y < 414) {
+    console.log('hourglass');
+
     if (game.board.score.isHourglass()) {
-      console.log('hourglass');
       game.board.hourglass.handleClick(e);
     }
-  } else if (x > 449 && x < 511 && y > 46 && y < 70) {
+  } else if (x > 452 && x < 507 && y > 46 && y < 70) {
     console.log('jmb');
     window.open('https://jmbourgoin.com');
-  } else if (x > 532 && x < 562 && y > 65 && y < 95) {
+  } else if (x > 528 && x < 558 && y > 64 && y < 92) {
     console.log('github');
     window.open('https://github.com/jmbourgoin');
-  } else if (x > 582 && x < 609 && y > 102 && y < 130) {
+  } else if (x > 576 && x < 605 && y > 98 && y < 126) {
     console.log('insta');
     window.open('https://www.instagram.com/jmb.shots/');
+  } else if (x > 616 && x < 645 && y > 141 && y < 168) {
+    console.log('linked-in');
+    window.open('https://www.linkedin.com/in/jason-bourgoin-060a6a116/');
   }
 }); // Code snippet to provide an x,y coordinate to print 
 // on the console relative to the game board.  Accounts 
@@ -249,22 +255,22 @@ function () {
     this.wedges.createWedges();
     this.sounds = new _soundCollection__WEBPACK_IMPORTED_MODULE_5__["default"]();
     this.sounds.createSounds();
-    this.center = new _center__WEBPACK_IMPORTED_MODULE_3__["default"](388, 383, this.wedges);
+    this.center = new _center__WEBPACK_IMPORTED_MODULE_3__["default"](388, 373.5, this.wedges);
     this.score = new _score__WEBPACK_IMPORTED_MODULE_4__["default"]();
     this.timer = new _timer__WEBPACK_IMPORTED_MODULE_2__["default"](this.center, this.score, this.sounds);
-    this.topPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 173, this.center, this.score);
-    this.bottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 605, this.center, this.score);
-    this.leftTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](185, 283, this.center, this.score);
-    this.leftBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](185, 475, this.center, this.score);
-    this.rightTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](589, 283, this.center, this.score);
-    this.rightBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](590, 475, this.center, this.score);
+    this.topPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 168, this.center, this.score);
+    this.bottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 589, this.center, this.score);
+    this.leftTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](191, 275, this.center, this.score);
+    this.leftBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](191, 462, this.center, this.score);
+    this.rightTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](584, 275, this.center, this.score);
+    this.rightBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](584, 462, this.center, this.score);
     this.handleClick = this.handleClick.bind(this);
     var pieShop = [this.topPie, this.bottomPie, this.leftTopPie, this.leftBottomPie, this.rightTopPie, this.rightBottomPie];
-    this.radioActive = new _radioactive__WEBPACK_IMPORTED_MODULE_7__["default"](103, 373, pieShop, this.center, this.score);
+    this.radioActive = new _radioactive__WEBPACK_IMPORTED_MODULE_7__["default"](110, 363, pieShop, this.center, this.score);
     this.radioActive.generateImage();
-    this.five = new _five__WEBPACK_IMPORTED_MODULE_8__["default"](458, 128, this.center, this.score);
+    this.five = new _five__WEBPACK_IMPORTED_MODULE_8__["default"](453, 123, this.center, this.score);
     this.five.generateImage();
-    this.hourglass = new _hourglass__WEBPACK_IMPORTED_MODULE_9__["default"](626, 371, this.center, this.score);
+    this.hourglass = new _hourglass__WEBPACK_IMPORTED_MODULE_9__["default"](618, 362, this.center, this.score);
     this.hourglass.generateImage();
   }
 
@@ -290,6 +296,9 @@ function () {
       this.rightBottomPie.newGame();
       this.timer.reset();
       this.stop();
+      this.score.deactivateFive();
+      this.score.deactivateRadioactive();
+      this.score.deactivateHourglass();
     }
   }, {
     key: "render",
@@ -896,6 +905,7 @@ function () {
     this.lives = 6;
     this.level = 1;
     this.levelCount = 0;
+    this.totalLevels = 0;
     this.radioactive = false;
     this.five = false;
     this.hourglass = false;
@@ -932,7 +942,7 @@ function () {
   }, {
     key: "rewindTime",
     value: function rewindTime() {
-      this.level -= 2;
+      this.level -= 5;
     }
   }, {
     key: "addLife",
@@ -965,17 +975,18 @@ function () {
       this.level += 1;
       this.totalLevels += 1;
       this.radioActiveCount += 0.5;
+      debugger;
 
       if (this.radioActiveCount === 1) {
         this.radioactive = true;
         this.radioActiveCount = 0;
       }
 
-      if (this.totalLevels % 7 === 0 && this.hourglass === false) {
+      if (this.totalLevels % 8 === 0) {
         this.hourglass = true;
       }
 
-      if (this.totalLevels % 5 === 0 && this.five === false) {
+      if (this.totalLevels % 5 === 0) {
         this.five = true;
       }
     }
@@ -1014,13 +1025,13 @@ function () {
       ctx.fillStyle = 'white';
       ctx.textAlign = 'center';
       ctx.font = "22px Arial";
-      ctx.fillText(this.lives, 212, 670);
+      ctx.fillText(this.lives, 215, 652);
       var canvas = document.getElementById("myCanvas");
       var ctx = canvas.getContext("2d");
       ctx.fillStyle = 'white';
       ctx.textAlign = 'center';
       ctx.font = "22px Arial";
-      ctx.fillText(this.score, 568, 670);
+      ctx.fillText(this.score, 564, 652);
     }
   }]);
 
@@ -1231,7 +1242,7 @@ function () {
       var wid = 15 + this.x * 18;
       this.ctx.beginPath();
       this.ctx.lineWidth = wid;
-      this.ctx.arc(388, 383, 110, 0, Math.PI * interval, false);
+      this.ctx.arc(388, 375, 110, 0, Math.PI * interval, false);
       this.ctx.strokeStyle = color;
       this.ctx.stroke();
       this.ctx.closePath();
