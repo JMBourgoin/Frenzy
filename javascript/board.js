@@ -17,22 +17,22 @@ class Board {
         this.wedges.createWedges();
         this.sounds = new SoundCollection();
         this.sounds.createSounds();
-        this.center = new Center(388, 373.5, this.wedges);
+        this.center = new Center(388, 386, this.wedges);
         this.score = new Score();
         this.timer = new Timer(this.center, this.score, this.sounds);
-        this.topPie = new Pie(388, 168, this.center, this.score);
-        this.bottomPie = new Pie(388, 589, this.center, this.score);
-        this.leftTopPie = new Pie(191, 275, this.center, this.score);
-        this.leftBottomPie = new Pie(191, 462, this.center, this.score);
-        this.rightTopPie = new Pie(584, 275, this.center, this.score);
-        this.rightBottomPie = new Pie(584, 462, this.center, this.score);
+        this.topPie = new Pie(388, 175, this.center, this.score);
+        this.bottomPie = new Pie(388, 608, this.center, this.score);
+        this.leftTopPie = new Pie(184, 285, this.center, this.score);
+        this.leftBottomPie = new Pie(184, 478, this.center, this.score);
+        this.rightTopPie = new Pie(592, 285, this.center, this.score);
+        this.rightBottomPie = new Pie(592, 478, this.center, this.score);
         this.handleClick = this.handleClick.bind(this);
         const pieShop = [this.topPie, this.bottomPie, this.leftTopPie, this.leftBottomPie, this.rightTopPie, this.rightBottomPie];
-        this.radioActive = new RadioActive(110, 363, pieShop, this.center, this.score);
+        this.radioActive = new RadioActive(100, 375, pieShop, this.center, this.score);
         this.radioActive.generateImage();
-        this.five = new Five (453, 123, this.center, this.score);
+        this.five = new Five (458, 128, this.center, this.score);
         this.five.generateImage();
-        this.hourglass = new Hourglass(618, 362, this.center, this.score);
+        this.hourglass = new Hourglass(627, 375, this.center, this.score);
         this.hourglass.generateImage();
     }
 

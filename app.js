@@ -27,15 +27,15 @@ window.addEventListener('click', function(e) {
     const rightBottomPie = game.board.rightBottomPie;
     const center = game.board.center;
 
-    if (x > 318 && x < 458 && y >96 && y < 238){
+    if (x > 318 && x < 458 && y >101 && y < 245){
         console.log('click1');
         game.board.handleClick(e, topPie);
 
-    } else if (x > 318 && x < 458 && y > 518 && y < 657){
+    } else if (x > 318 && x < 458 && y > 523 && y < 662){
         console.log('click4');
         game.board.handleClick(e, bottomPie);
 
-    } else if(x > 317 && x < 459 && y > 308 && y < 437 && gameOver.className === 'hide'){
+    } else if(x > 317 && x < 459 && y > 313 && y < 442 && gameOver.className === 'hide'){
         console.log("center");
         game.board.handleClick(e, center);
 
@@ -43,15 +43,15 @@ window.addEventListener('click', function(e) {
           gameOver.className = "hide";
           game.board.sounds.pauseAll();
 
-    } else if (x > 114 && x < 257 && y > 198 && y < 348){
+    } else if (x > 114 && x < 257 && y > 203 && y < 352){
         console.log('click6');
         game.board.handleClick(e, leftTopPie);
 
-    } else if (x > 128 && x < 257 && y > 399 && y < 540){
+    } else if (x > 128 && x < 257 && y > 402 && y < 545){
         console.log('click5');
         game.board.handleClick(e, leftBottomPie);
 
-    } else if (x > 518 && x < 661 && y > 198 && y < 348){
+    } else if (x > 518 && x < 661 && y > 203 && y < 353){
         console.log('click2');
         game.board.handleClick(e, rightTopPie);
 
@@ -59,25 +59,25 @@ window.addEventListener('click', function(e) {
         console.log('click3');
         game.board.handleClick(e, rightBottomPie);
 
-    } else if ( x > 177 && x < 230 && y > 91 && y < 141){
+    } else if ( x > 177 && x < 230 && y > 94 && y < 145){
         console.log('start');
         game.board.sounds.playStart();
         game.start();
 
-    }else if ( x > 239 && x < 290 && y > 61 && y < 114){
+    }else if ( x > 239 && x < 290 && y > 64 && y < 118){
         console.log('stop');
         game.board.sounds.playQuit();
         game.board.gameOver();
         game.stop();
 
-    } else if ( x > 107 && x < 164 && y > 360 && y < 413){
+    } else if ( x > 107 && x < 164 && y > 364 && y < 417){
             console.log('radioactive');
         if(game.board.score.isRadioactive()){
             game.board.radioActive.handleClick(e);
             game.board.sounds.playRadioactive();
         }
 
-    } else if ( x > 455 && x < 511 && y > 121 && y <178){
+    } else if ( x > 455 && x < 511 && y > 125 && y <182){
         console.log('5x');
         if(game.board.score.isFive()){
             game.board.five.handleClick(e);

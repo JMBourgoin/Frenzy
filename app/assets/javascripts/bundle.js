@@ -127,47 +127,47 @@ window.addEventListener('click', function (e) {
   var rightBottomPie = game.board.rightBottomPie;
   var center = game.board.center;
 
-  if (x > 318 && x < 458 && y > 96 && y < 238) {
+  if (x > 318 && x < 458 && y > 101 && y < 245) {
     console.log('click1');
     game.board.handleClick(e, topPie);
-  } else if (x > 318 && x < 458 && y > 518 && y < 657) {
+  } else if (x > 318 && x < 458 && y > 523 && y < 662) {
     console.log('click4');
     game.board.handleClick(e, bottomPie);
-  } else if (x > 317 && x < 459 && y > 308 && y < 437 && gameOver.className === 'hide') {
+  } else if (x > 317 && x < 459 && y > 313 && y < 442 && gameOver.className === 'hide') {
     console.log("center");
     game.board.handleClick(e, center);
   } else if (gameOver.className === "game-over-modal" && x > 360 && x < 396 && y > 439 && y < 479) {
     gameOver.className = "hide";
     game.board.sounds.pauseAll();
-  } else if (x > 114 && x < 257 && y > 198 && y < 348) {
+  } else if (x > 114 && x < 257 && y > 203 && y < 352) {
     console.log('click6');
     game.board.handleClick(e, leftTopPie);
-  } else if (x > 128 && x < 257 && y > 399 && y < 540) {
+  } else if (x > 128 && x < 257 && y > 402 && y < 545) {
     console.log('click5');
     game.board.handleClick(e, leftBottomPie);
-  } else if (x > 518 && x < 661 && y > 198 && y < 348) {
+  } else if (x > 518 && x < 661 && y > 203 && y < 353) {
     console.log('click2');
     game.board.handleClick(e, rightTopPie);
   } else if (x > 507 && x < 633 && y > 411 && y < 535) {
     console.log('click3');
     game.board.handleClick(e, rightBottomPie);
-  } else if (x > 177 && x < 230 && y > 91 && y < 141) {
+  } else if (x > 177 && x < 230 && y > 94 && y < 145) {
     console.log('start');
     game.board.sounds.playStart();
     game.start();
-  } else if (x > 239 && x < 290 && y > 61 && y < 114) {
+  } else if (x > 239 && x < 290 && y > 64 && y < 118) {
     console.log('stop');
     game.board.sounds.playQuit();
     game.board.gameOver();
     game.stop();
-  } else if (x > 107 && x < 164 && y > 360 && y < 413) {
+  } else if (x > 107 && x < 164 && y > 364 && y < 417) {
     console.log('radioactive');
 
     if (game.board.score.isRadioactive()) {
       game.board.radioActive.handleClick(e);
       game.board.sounds.playRadioactive();
     }
-  } else if (x > 455 && x < 511 && y > 121 && y < 178) {
+  } else if (x > 455 && x < 511 && y > 125 && y < 182) {
     console.log('5x');
 
     if (game.board.score.isFive()) {
@@ -255,22 +255,22 @@ function () {
     this.wedges.createWedges();
     this.sounds = new _soundCollection__WEBPACK_IMPORTED_MODULE_5__["default"]();
     this.sounds.createSounds();
-    this.center = new _center__WEBPACK_IMPORTED_MODULE_3__["default"](388, 373.5, this.wedges);
+    this.center = new _center__WEBPACK_IMPORTED_MODULE_3__["default"](388, 386, this.wedges);
     this.score = new _score__WEBPACK_IMPORTED_MODULE_4__["default"]();
     this.timer = new _timer__WEBPACK_IMPORTED_MODULE_2__["default"](this.center, this.score, this.sounds);
-    this.topPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 168, this.center, this.score);
-    this.bottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 589, this.center, this.score);
-    this.leftTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](191, 275, this.center, this.score);
-    this.leftBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](191, 462, this.center, this.score);
-    this.rightTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](584, 275, this.center, this.score);
-    this.rightBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](584, 462, this.center, this.score);
+    this.topPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 175, this.center, this.score);
+    this.bottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](388, 608, this.center, this.score);
+    this.leftTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](184, 285, this.center, this.score);
+    this.leftBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](184, 478, this.center, this.score);
+    this.rightTopPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](592, 285, this.center, this.score);
+    this.rightBottomPie = new _pie__WEBPACK_IMPORTED_MODULE_1__["default"](592, 478, this.center, this.score);
     this.handleClick = this.handleClick.bind(this);
     var pieShop = [this.topPie, this.bottomPie, this.leftTopPie, this.leftBottomPie, this.rightTopPie, this.rightBottomPie];
-    this.radioActive = new _radioactive__WEBPACK_IMPORTED_MODULE_7__["default"](110, 363, pieShop, this.center, this.score);
+    this.radioActive = new _radioactive__WEBPACK_IMPORTED_MODULE_7__["default"](100, 375, pieShop, this.center, this.score);
     this.radioActive.generateImage();
-    this.five = new _five__WEBPACK_IMPORTED_MODULE_8__["default"](453, 123, this.center, this.score);
+    this.five = new _five__WEBPACK_IMPORTED_MODULE_8__["default"](458, 128, this.center, this.score);
     this.five.generateImage();
-    this.hourglass = new _hourglass__WEBPACK_IMPORTED_MODULE_9__["default"](618, 362, this.center, this.score);
+    this.hourglass = new _hourglass__WEBPACK_IMPORTED_MODULE_9__["default"](627, 375, this.center, this.score);
     this.hourglass.generateImage();
   }
 
@@ -906,9 +906,9 @@ function () {
     this.level = 1;
     this.levelCount = 0;
     this.totalLevels = 0;
-    this.radioactive = false;
-    this.five = false;
-    this.hourglass = false;
+    this.radioactive = true;
+    this.five = true;
+    this.hourglass = true;
     this.yourScore = 0;
     this.sandsTime = 0;
     this.fiveScore = 0;
@@ -1025,13 +1025,13 @@ function () {
       ctx.fillStyle = 'white';
       ctx.textAlign = 'center';
       ctx.font = "22px Arial";
-      ctx.fillText(this.lives, 215, 652);
+      ctx.fillText(this.lives, 210, 673);
       var canvas = document.getElementById("myCanvas");
       var ctx = canvas.getContext("2d");
       ctx.fillStyle = 'white';
       ctx.textAlign = 'center';
       ctx.font = "22px Arial";
-      ctx.fillText(this.score, 564, 652);
+      ctx.fillText(this.score, 568, 673);
     }
   }]);
 

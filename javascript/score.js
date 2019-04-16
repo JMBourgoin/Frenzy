@@ -5,9 +5,9 @@ class Score {
         this.level = 1;
         this.levelCount = 0;
         this.totalLevels = 0;
-        this.radioactive = false;
-        this.five = false;
-        this.hourglass = false;
+        this.radioactive = true;
+        this.five = true;
+        this.hourglass = true;
         this.yourScore = 0;
         this.sandsTime = 0;
         this.fiveScore = 0;
@@ -109,14 +109,14 @@ class Score {
         ctx.fillStyle = 'white';
         ctx.textAlign = 'center';
         ctx.font = "22px Arial";
-        ctx.fillText(this.lives, 215, 652);
+        ctx.fillText(this.lives, 210, 673);
 
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
         ctx.fillStyle = 'white';
         ctx.textAlign = 'center';
         ctx.font = "22px Arial";
-        ctx.fillText(this.score, 564, 652);
+        ctx.fillText(this.score, 568, 673);
     }
 }
 
