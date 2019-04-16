@@ -906,9 +906,9 @@ function () {
     this.level = 1;
     this.levelCount = 0;
     this.totalLevels = 0;
-    this.radioactive = true;
-    this.five = true;
-    this.hourglass = true;
+    this.radioactive = false;
+    this.five = false;
+    this.hourglass = false;
     this.yourScore = 0;
     this.sandsTime = 0;
     this.fiveScore = 0;
