@@ -1242,7 +1242,7 @@ function () {
       var wid = 15 + this.x * 18;
       this.ctx.beginPath();
       this.ctx.lineWidth = wid;
-      this.ctx.arc(388, 375, 110, 0, Math.PI * interval, false);
+      this.ctx.arc(388, 386, 105, 0, Math.PI * interval, false);
       this.ctx.strokeStyle = color;
       this.ctx.stroke();
       this.ctx.closePath();
