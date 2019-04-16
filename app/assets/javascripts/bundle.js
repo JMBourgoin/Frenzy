@@ -975,14 +975,13 @@ function () {
       this.level += 1;
       this.totalLevels += 1;
       this.radioActiveCount += 0.5;
-      debugger;
 
       if (this.radioActiveCount === 1) {
         this.radioactive = true;
         this.radioActiveCount = 0;
       }
 
-      if (this.totalLevels % 8 === 0) {
+      if (this.totalLevels % 7 === 0) {
         this.hourglass = true;
       }
 

@@ -70,7 +70,11 @@ window.addEventListener('click', function(e) {
         game.board.gameOver();
         game.stop();
 
-    } else if ( x > 107 && x < 164 && y > 364 && y < 417){
+    } else if ( x > 65 && x < 112 && y > 160 && y < 205){
+        console.log('help');
+        game.board.sounds.playPieWedge();
+        
+    }  else if ( x > 107 && x < 164 && y > 364 && y < 417){
             console.log('radioactive');
         if(game.board.score.isRadioactive()){
             game.board.radioActive.handleClick(e);
