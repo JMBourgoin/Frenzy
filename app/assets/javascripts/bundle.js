@@ -164,7 +164,7 @@ window.addEventListener('click', function (e) {
     console.log('help');
     game.board.sounds.playPieWedge();
     game.toggleHelp();
-  } else if (x > 77 && x < 128 && y > 41 && y < 56) {
+  } else if (x > 131 && x < 185 && y > 41 && y < 56) {
     console.log('closehelp');
     game.toggleHelp();
   } else if (x > 107 && x < 164 && y > 364 && y < 417) {
