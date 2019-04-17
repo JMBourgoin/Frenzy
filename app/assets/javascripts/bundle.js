@@ -186,6 +186,7 @@ window.addEventListener('click', function (e) {
 
     if (game.board.score.isHourglass()) {
       game.board.hourglass.handleClick(e);
+      game.board.sounds.playHourglass();
     }
   } else if (x > 452 && x < 507 && y > 46 && y < 70) {
     console.log('jmb');
@@ -1121,12 +1122,14 @@ function () {
     this.gameOver = '';
     this.fiveX = '';
     this.radioActive = '';
+    this.hourglass = '';
     this.playCenter = this.playCenter.bind(this);
     this.playPieWedge = this.playPieWedge.bind(this);
     this.playClear = this.playClear.bind(this);
     this.playGameOver = this.playGameOver.bind(this);
     this.playRadioactive = this.playRadioactive.bind(this);
     this.playFiveX = this.playFiveX.bind(this);
+    this.playHourglass = this.playHourglass.bind(this);
   }
 
   _createClass(SoundCollection, [{
@@ -1170,6 +1173,11 @@ function () {
       this.fiveX.play();
     }
   }, {
+    key: "playHourglass",
+    value: function playHourglass() {
+      this.hourglass.play();
+    }
+  }, {
     key: "pauseAll",
     value: function pauseAll() {
       this.pieWedge.pause();
@@ -1198,6 +1206,8 @@ function () {
       this.radioActive.src = "./app/assets/sounds/radioactive.mp3";
       this.fiveX = document.createElement("audio");
       this.fiveX.src = "./app/assets/sounds/5x.mp3";
+      this.hourglass = document.createElement("audio");
+      this.hourglass.src = "./app/assets/sounds/hourglass.mp3";
     }
   }]);
 
