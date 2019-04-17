@@ -28,7 +28,9 @@ alive in order to do so.  CAUTION:  This is a game of skill, not chance.  Your r
 how long you'll last - not the God of Wedges.<br><br>
 
 ## SCREENSHOTS
-![Screenshots](screenshot)
-![Radioactive](radioactive.png)
+![Screenshots](screenshot)<br>
+![Radioactive](radioactive.png) Radioactivity bonus: Clears the board entirely. <br>
+![5x](5x.png) 5x bonus: Adds 5 extra lives.<br>
+![Hourglass](hourglass.png) Sands of Time bonus: Slows the timer to pre-panic levels.<br>
 
 
