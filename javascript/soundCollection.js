@@ -50,7 +50,7 @@ class SoundCollection {
     }
 
     playHourglass(){
-        this.playHourglass.play();
+        this.Hourglass.play();
     }
 
     pauseAll(){
