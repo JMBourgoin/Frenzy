@@ -28,5 +28,5 @@ alive in order to do so.  CAUTION:  This is a game of skill, not chance.  Your r
 how long you'll last - not the God of Wedges.<br><br>
 
 ## SCREENSHOTS
-![Screenshots](screenshot.png)
+![Screenshots](screenshot)
 
