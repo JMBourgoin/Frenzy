@@ -121,11 +121,11 @@ window.addEventListener('click', function(e) {
 // on the console relative to the game board.  Accounts 
 // for thewindow size.
 
-window.addEventListener('mousemove', function(e){
-    e.preventDefault();
-    let x = (e.pageX - xmargin);
-    let y = (e.pageY -ymargin);
+// window.addEventListener('mousemove', function(e){
+//     e.preventDefault();
+//     let x = (e.pageX - xmargin);
+//     let y = (e.pageY -ymargin);
 
-    console.log('x: ' + x);
-    console.log('y: ' + y);
-});
+//     console.log('x: ' + x);
+//     console.log('y: ' + y);
+// });

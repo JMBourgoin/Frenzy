@@ -171,7 +171,7 @@ window.addEventListener('click', function (e) {
     console.log('radioactive');
 
     if (game.board.score.isRadioactive()) {
-      game.board.radioActive.handleClick(e);
+      game.board.radioActive.handleClick(e, game.board.timer);
       game.board.sounds.playRadioactive();
     }
   } else if (x > 455 && x < 511 && y > 125 && y < 182) {
@@ -203,14 +203,13 @@ window.addEventListener('click', function (e) {
 }); // Code snippet to provide an x,y coordinate to print 
 // on the console relative to the game board.  Accounts 
 // for thewindow size.
-
-window.addEventListener('mousemove', function (e) {
-  e.preventDefault();
-  var x = e.pageX - xmargin;
-  var y = e.pageY - ymargin;
-  console.log('x: ' + x);
-  console.log('y: ' + y);
-});
+// window.addEventListener('mousemove', function(e){
+//     e.preventDefault();
+//     let x = (e.pageX - xmargin);
+//     let y = (e.pageY -ymargin);
+//     console.log('x: ' + x);
+//     console.log('y: ' + y);
+// });
 
 /***/ }),
 
@@ -405,10 +404,10 @@ function () {
     key: "handleClick",
     value: function handleClick(e, timer, score, sounds) {
       e.preventDefault();
-      e.stopPropagation();
       timer.reset();
       score.takeLife();
       sounds.playCenter();
+      e.stopPropagation();
     }
   }, {
     key: "addWedge",
@@ -428,7 +427,7 @@ function () {
       ctx.lineWidth = 4;
       ctx.beginPath();
       ctx.arc(this.x, this.y, 70, 0, Math.PI * 2, false);
-      ctx.strokeStyle = "#212121";
+      ctx.strokeStyle = "#111111";
       ctx.stroke();
       ctx.closePath();
 
@@ -687,6 +686,8 @@ function () {
     this.wedges = [];
     this.center = center;
     this.score = score;
+    this.fade = 1;
+    this.fader = true;
     this.render = this.render.bind(this);
     this.wedgePos = {
       0: {
@@ -817,7 +818,7 @@ function () {
       ctx.lineWidth = 4;
       ctx.beginPath();
       ctx.arc(this.x, this.y, 70, 0, Math.PI * 2, false);
-      ctx.strokeStyle = "#212121";
+      ctx.strokeStyle = "#111111";
       ctx.stroke();
       ctx.closePath();
 
@@ -825,8 +826,20 @@ function () {
         this.wedges.forEach(function (wedge) {
           var num = wedge.num;
           var x = _this.wedgePos[num].xv;
-          var y = _this.wedgePos[num].yv;
-          return ctx.drawImage(wedge.image, x, y);
+          var y = _this.wedgePos[num].yv; // if (this.fade === 1){
+          //     this.fader = true;
+          // } else if (this.fade === 0.6){
+          //     this.fader = false;
+          // }
+          // if(this.fader === true){
+          //     this.fade -= 0.01;
+          // } else {
+          //     this.fade += 0.01;
+          // }
+          // ctx.save();
+          // ctx.globalAlpha = this.fade;
+
+          ctx.drawImage(wedge.image, x, y); // ctx.restore();
         });
 
         if (this.score.gameOver()) {
@@ -885,12 +898,13 @@ function () {
     }
   }, {
     key: "handleClick",
-    value: function handleClick(e) {
+    value: function handleClick(e, timer) {
       e.preventDefault();
       this.pieShop.forEach(function (pie) {
         return pie.clear();
       });
       this.score.deactivateRadioactive();
+      timer.reset();
     }
   }, {
     key: "render",
@@ -1061,13 +1075,13 @@ function () {
       var ctx = canvas.getContext("2d");
       ctx.fillStyle = 'white';
       ctx.textAlign = 'center';
-      ctx.font = "22px Arial";
+      ctx.font = "22px Sans";
       ctx.fillText(this.lives, 210, 673);
       var canvas = document.getElementById("myCanvas");
       var ctx = canvas.getContext("2d");
       ctx.fillStyle = 'white';
       ctx.textAlign = 'center';
-      ctx.font = "22px Arial";
+      ctx.font = "22px Sans";
       ctx.fillText(this.score, 568, 673);
     }
   }]);

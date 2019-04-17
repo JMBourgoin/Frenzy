@@ -41,7 +41,7 @@ class Center {
         ctx.lineWidth = 4;
         ctx.beginPath();
         ctx.arc(this.x, this.y, 70, 0, Math.PI*2, false);
-        ctx.strokeStyle = "#212121";
+        ctx.strokeStyle = "#111111";
         ctx.stroke();
         ctx.closePath();
 

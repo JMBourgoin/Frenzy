@@ -7,7 +7,8 @@ class Pie {
         this.wedges = [];
         this.center = center;
         this.score = score;
-
+        this.fade = 1;
+        this.fader = true;
         this.render = this.render.bind(this);
         this.wedgePos = {
             0: {xv: this.x - 40, yv: this.y - 74},
@@ -107,7 +108,7 @@ class Pie {
         ctx.lineWidth = 4;
         ctx.beginPath();
         ctx.arc(this.x, this.y, 70, 0, Math.PI*2, false);
-        ctx.strokeStyle = "#212121";
+        ctx.strokeStyle = "#111111";
         ctx.stroke();
         ctx.closePath();
 
@@ -116,7 +117,21 @@ class Pie {
                 const num = wedge.num;
                 const x = this.wedgePos[num].xv;
                 const y = this.wedgePos[num].yv;
-                return ctx.drawImage(wedge.image, x, y);
+                // if (this.fade === 1){
+                //     this.fader = true;
+                // } else if (this.fade === 0.6){
+                //     this.fader = false;
+                // }
+                
+                // if(this.fader === true){
+                //     this.fade -= 0.01;
+                // } else {
+                //     this.fade += 0.01;
+                // }
+                // ctx.save();
+                // ctx.globalAlpha = this.fade;
+                ctx.drawImage(wedge.image, x, y);
+                // ctx.restore();
             });
             if(this.score.gameOver()){
                 this.newGame();
