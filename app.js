@@ -82,7 +82,7 @@ window.addEventListener('click', function(e) {
     } else if ( x > 107 && x < 164 && y > 364 && y < 417){
             console.log('radioactive');
         if(game.board.score.isRadioactive()){
-            game.board.radioActive.handleClick(e);
+            game.board.radioActive.handleClick(e, game.board.timer);
             game.board.sounds.playRadioactive();
         }
 

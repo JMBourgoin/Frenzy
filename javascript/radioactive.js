@@ -15,12 +15,13 @@ class RadioActive {
         this.image = img;
     }
 
-    handleClick(e){
+    handleClick(e, timer){
         e.preventDefault();
         this.pieShop.forEach(pie => {
             return pie.clear();
         });
         this.score.deactivateRadioactive();
+        timer.reset();
     }
 
     render(){

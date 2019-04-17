@@ -21,10 +21,10 @@ class Center {
     
     handleClick(e, timer, score, sounds){
         e.preventDefault();
-        e.stopPropagation();
         timer.reset();
         score.takeLife();
         sounds.playCenter();
+        e.stopPropagation();
         }
 
     addWedge(){
