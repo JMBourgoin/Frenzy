@@ -111,14 +111,14 @@ class Score {
         var ctx = canvas.getContext("2d");
         ctx.fillStyle = 'white';
         ctx.textAlign = 'center';
-        ctx.font = "22px Sans";
+        ctx.font = "22px sans-serif";
         ctx.fillText(this.lives, 210, 673);
 
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
         ctx.fillStyle = 'white';
         ctx.textAlign = 'center';
-        ctx.font = "22px Sans";
+        ctx.font = "22px sans-serif";
         ctx.fillText(this.score, 568, 673);
     }
 }
