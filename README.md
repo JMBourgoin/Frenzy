@@ -25,7 +25,8 @@ points, the timer is gradually quickened. Simple.
             
 Wedge positions are dealt at random.  You must negotiate between the temptation to score a maximum number of points and staying
 alive in order to do so.  CAUTION:  This is a game of skill, not chance.  Your reflexes, flexible mind, quick decision making AND YOUR STRESS MANAGMENT determine
-how long you'll last - not the God of Wedges.
+how long you'll last - not the God of Wedges.<br><br>
 
 ## SCREENSHOTS
+![Screenshots](screenshot1.png)
 
