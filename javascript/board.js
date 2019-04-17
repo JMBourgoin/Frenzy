@@ -34,6 +34,7 @@ class Board {
         this.five.generateImage();
         this.hourglass = new Hourglass(627, 375, this.center, this.score);
         this.hourglass.generateImage();
+        this.help = false;
     }
 
     handleClick(e, pie, game){
@@ -60,6 +61,7 @@ class Board {
         this.score.deactivateHourglass();
     }
 
+
     render(){
         this.timer.draw();
         this.score.render();
@@ -82,6 +84,7 @@ class Board {
             const $yourScore = $("#yourScore");
             const $highScore = $("#highScore");
             $yourScore.html(this.score.yourScore);
+            $highScore.html(this.score.highScore);
         }
 
     }

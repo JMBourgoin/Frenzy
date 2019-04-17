@@ -16,53 +16,84 @@
         <div class="game-over-image">
             <img src='./app/assets/images/gameover.svg' alt="gameover">
         </div>
-        <div class="hide">
+        <div class="game-over-scores">
             <div class="score-boards">
                 <h2>Your Score:</h2>
                 <h3 id="yourScore"></h3>
             </div>
             <div class="score-boards">
+                <h2>High Score:</h2>
                 <h3 id="highScore"></h3>
             </div>
         </div>
-        <div class="instructions">
-            <div class="instructions-1">
-                <h1>FRENZY</h3>
-                <h3>OBJECTIVE</h3>
-                <p>
-                    Can you handle the frenzied pace and put the pieces together?!  Frenzy is a fast paced game of 
-                    strategy and quick analytical thinking.  It's easy to learn and impossible to master.
-                    <br>
-                    Your objective is simple:  fill the 6 empty circles with fitting pie wedges (displayed in the center circle) in order to clear the completed pie and 
-                    earn yourself points. The higher the ratio of like colored wedges in a completed pie, the higher number of
-                    points you're awarded.  Completed pies filled with 6 pie wedges of the same color earn the maximum number of points (25)
-                    AND earn you an additional life.
-                    <br>
-                    Your enemy is time:  Should the timer expire before a wedge is placed, a life is lost.  As you fill your pockets with more and more 
-                    points, the timer is gradually quickened. Simple.  
-                <p>
-                <h3>STRATEGY</h3>
-                <p>
-                    Wedge positions are dealt at random.  You must negotiate between the temptation to score a maximum number of points and staying
-                    alive in order to do so.  CAUTION:  This is a game of skill, not chance.  Your inate skills,  quick decision making, stress management determine
-                    how long you'll last - not the God of Wedges.
-                </p>
-                <h3>CONTROLS</h3>
-                <ul>
-                    <li><img src="./app/assets/images/start.png" alt="start">
-                        <p> Start button.</p>
+    </div>
+    <div id="help" class="hide">
+        <div class="instructions-1">
+            <h4>CLOSE</h4>
+            <h1>FRENZY</h3>
+            <h3>OBJECTIVE</h3>
+            <p>
+                Can you handle the frenzied pace and put the pieces together?!  Frenzy is a fast paced game of 
+                strategy and quick analytical thinking.  It's easy to learn and impossible to master.
+                <br>
+                Your objective is simple:  fill the 6 empty circles with fitting pie wedges (displayed in the center circle) in order to clear the completed pie and 
+                earn yourself points. The higher the ratio of like colored wedges in a completed pie, the higher number of
+                points you're awarded.  Completed pies filled with 6 pie wedges of the same color earn the maximum number of points (25)
+                AND earn you an additional life.
+                <br>
+                Your enemy is time:  Should the timer expire before a wedge is placed, a life is lost.  As you fill your pockets with more and more 
+                points, the timer is gradually quickened. Simple.  
+            <p>
+            <h3>STRATEGY</h3>
+            <p>
+                Wedge positions are dealt at random.  You must negotiate between the temptation to score a maximum number of points and staying
+                alive in order to do so.  CAUTION:  This is a game of skill, not chance.  Your inate skills,  quick decision making, stress management determine
+                how long you'll last - not the God of Wedges.
+            </p>
+            <div class="hr"></div>
+            <h3>CONTROLS</h3>
+            <div class="controls">
+                 <ul>
+                    <li>
+                        <div class="listitems">
+                            <img src="./app/assets/images/start.png" alt="start">
+                            <p>Start button.</p>
+                        </div>
                     </li>
-                    <li><img src="./app/assets/images/stop.png" alt="start">
-                        <p> Quit button.</p>
+                    <li>
+                        <div class="listitems">
+                            <img src="./app/assets/images/stop.png" alt="start">
+                            <p>Quit button.</p>
+                        </div>
                     </li>
-                    <li><img src="./app/assets/images/center.png" alt="start">
-                        <p> Center area.  Clicking the center area passes to the next wedge, costing you 1 life.  Use the center to pass when the wedge position is not playable.  You may also avoid the center all together and just wait out the time.</p>
-                    </li>
-                    <li><img src="./app/assets/images/radioactive.png" alt="start">
-                        <p> Radioactivity.  Clears all pies and points are scored for EVERY pie piece placed</p>
-                    </li>
-                </ul>
-            </div>
+                     <li>
+                         <div class="listitems">
+                             <img src="./app/assets/images/center.png" alt="start">
+                             <p>Center area.  Clicking the center area passes to the next wedge, costing you 1 life.  Use the center to pass when the wedge position is not playable.  You may also avoid the center all together and just wait out the time.</p>
+                         </div>
+                     </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <div class="listitems">
+                                <img src="./app/assets/images/radioactive.png" alt="start">
+                                <p>Radioactivity bonus token.  Clears all pies  and points are scored for EVERY pie wedge placed.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="listitems">
+                                <img src="./app/assets/images/5x.png" alt="start">
+                                <p>5X bonus token.  Adds 5 lives.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="listitems">
+                                <img src="./app/assets/images/hourglass.png" alt="start">
+                                <p>5X bonus token.  Adds 5 lives.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
         </div>
     </div>
 </body>

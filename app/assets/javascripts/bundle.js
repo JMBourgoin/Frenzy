@@ -160,9 +160,13 @@ window.addEventListener('click', function (e) {
     game.board.sounds.playQuit();
     game.board.gameOver();
     game.stop();
-  } else if (x > 65 && x < 112 && y > 160 && y < 205) {
+  } else if (x > 113 && x < 164 && y > 144 && y < 194) {
     console.log('help');
     game.board.sounds.playPieWedge();
+    game.toggleHelp();
+  } else if (x > 77 && x < 128 && y > 41 && y < 56) {
+    console.log('closehelp');
+    game.toggleHelp();
   } else if (x > 107 && x < 164 && y > 364 && y < 417) {
     console.log('radioactive');
 
@@ -275,6 +279,7 @@ function () {
     this.five.generateImage();
     this.hourglass = new _hourglass__WEBPACK_IMPORTED_MODULE_9__["default"](627, 375, this.center, this.score);
     this.hourglass.generateImage();
+    this.help = false;
   }
 
   _createClass(Board, [{
@@ -328,6 +333,7 @@ function () {
         var $yourScore = jquery__WEBPACK_IMPORTED_MODULE_6___default()("#yourScore");
         var $highScore = jquery__WEBPACK_IMPORTED_MODULE_6___default()("#highScore");
         $yourScore.html(this.score.yourScore);
+        $highScore.html(this.score.highScore);
       }
     }
   }]);
@@ -540,6 +546,8 @@ function () {
     this.intervalId = '';
     this.stop = this.stop.bind(this);
     this.board = new _board_js__WEBPACK_IMPORTED_MODULE_0__["default"](this.stop);
+    this.help = false;
+    this.toggleHelp = this.toggleHelp.bind(this);
   }
 
   _createClass(Game, [{
@@ -552,6 +560,27 @@ function () {
     value: function stop() {
       clearInterval(this.intervalId);
       this.ctx.clearRect(0, 0, 800, 800);
+    }
+  }, {
+    key: "renderHelp",
+    value: function renderHelp() {
+      var help = document.getElementById("help");
+      help.className = "instructions";
+    }
+  }, {
+    key: "toggleHelp",
+    value: function toggleHelp() {
+      if (this.help === false) {
+        this.help = true;
+        this.intervalId = setInterval(this.renderHelp(), 60);
+      } else {
+        this.help = false;
+        var help = document.getElementById("help");
+        help.className = "hide";
+        clearInterval(this.intervalId);
+      }
+
+      ;
     }
   }, {
     key: "render",
@@ -913,6 +942,7 @@ function () {
     this.five = false;
     this.hourglass = false;
     this.yourScore = 0;
+    this.highScore = 0;
     this.sandsTime = 0;
     this.fiveScore = 0;
     this.radioActiveCount = 0;
@@ -1009,6 +1039,11 @@ function () {
     key: "newGame",
     value: function newGame() {
       this.yourScore = this.score;
+
+      if (this.yourScore > this.highScore) {
+        this.highScore = this.yourScore;
+      }
+
       this.score = 0;
       this.lives = 6;
       this.level = 1;

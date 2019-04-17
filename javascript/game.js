@@ -9,6 +9,8 @@ class Game {
         this.intervalId = '';
         this.stop = this.stop.bind(this);
         this.board = new Board(this.stop);
+        this.help = false;
+        this.toggleHelp = this.toggleHelp.bind(this);
         
     }
 
@@ -19,9 +21,26 @@ class Game {
     stop(){
         clearInterval(this.intervalId);
         this.ctx.clearRect(0, 0, 800, 800);
-
-
     }
+
+    renderHelp(){
+        const help = document.getElementById("help");
+        help.className = "instructions";
+    }
+
+    toggleHelp(){
+        if(this.help === false){
+            this.help = true;
+            this.intervalId = setInterval(this.renderHelp(), 60);
+        } else {
+            this.help = false;
+            const help = document.getElementById("help");
+            help.className = "hide";
+            clearInterval(this.intervalId);
+        };
+    }
+
+
 
     render(){
         this.board.render();

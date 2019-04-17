@@ -9,6 +9,7 @@ class Score {
         this.five = false;
         this.hourglass = false;
         this.yourScore = 0;
+        this.highScore = 0;
         this.sandsTime = 0;
         this.fiveScore = 0;
         this.radioActiveCount = 0;
@@ -92,6 +93,9 @@ class Score {
 
     newGame(){
         this.yourScore = this.score;
+        if(this.yourScore > this.highScore){
+            this.highScore = this.yourScore;
+        }
         this.score = 0;
         this.lives = 6;
         this.level = 1;

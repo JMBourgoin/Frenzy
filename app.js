@@ -70,11 +70,16 @@ window.addEventListener('click', function(e) {
         game.board.gameOver();
         game.stop();
 
-    } else if ( x > 65 && x < 112 && y > 160 && y < 205){
+    } else if ( x > 113 && x < 164 && y > 144 && y < 194){
         console.log('help');
         game.board.sounds.playPieWedge();
+        game.toggleHelp();
         
-    }  else if ( x > 107 && x < 164 && y > 364 && y < 417){
+    }  else if (x > 77 && x < 128 && y > 41 && y < 56){
+        console.log('closehelp');
+        game.toggleHelp();
+
+    } else if ( x > 107 && x < 164 && y > 364 && y < 417){
             console.log('radioactive');
         if(game.board.score.isRadioactive()){
             game.board.radioActive.handleClick(e);
