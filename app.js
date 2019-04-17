@@ -75,7 +75,7 @@ window.addEventListener('click', function(e) {
         game.board.sounds.playPieWedge();
         game.toggleHelp();
         
-    }  else if (x > 131 && x < 185 && y > 41 && y < 56){
+    }  else if (x > 54 && x < 185 && y > 41 && y < 56){
         console.log('closehelp');
         game.toggleHelp();
 
