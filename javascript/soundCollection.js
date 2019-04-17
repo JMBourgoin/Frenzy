@@ -7,12 +7,14 @@ class SoundCollection {
         this.gameOver = '';
         this.fiveX = '';
         this.radioActive = '';
+        this.hourglass = '';
         this.playCenter = this.playCenter.bind(this);
         this.playPieWedge = this.playPieWedge.bind(this);
         this.playClear = this.playClear.bind(this);
         this.playGameOver = this.playGameOver.bind(this);
         this.playRadioactive = this.playRadioactive.bind(this);
         this.playFiveX = this.playFiveX.bind(this);
+        this.playHourglass = this.playHourglass.bind(this);
     }
     
     playStart(){
@@ -45,6 +47,10 @@ class SoundCollection {
 
     playFiveX(){
         this.fiveX.play();
+    }
+
+    playHourglass(){
+        this.playHourglass.play();
     }
 
     pauseAll(){
@@ -80,6 +86,9 @@ class SoundCollection {
 
          this.fiveX = document.createElement("audio");
          this.fiveX.src = "./app/assets/sounds/5x.mp3";
+
+         this.hourglass = document.createElement("audio");
+         this.hourglass.src = "./app/assets/sounds/hourglass.mp3";
     }
 }
 

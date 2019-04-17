@@ -97,6 +97,7 @@ window.addEventListener('click', function(e) {
         console.log('hourglass');
         if(game.board.score.isHourglass()){
             game.board.hourglass.handleClick(e);
+            game.board.sounds.playHourglass();
         }
     } else if (x > 452 && x < 507 && y > 46 && y < 70){
         console.log('jmb');
