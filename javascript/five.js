@@ -16,6 +16,7 @@ class Five {
 
     handleClick(e){
         e.preventDefault();
+        e.stopPropagation();
         this.score.addFive();
         this.score.deactivateFive();
     }

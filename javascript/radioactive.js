@@ -17,6 +17,7 @@ class RadioActive {
 
     handleClick(e, timer){
         e.preventDefault();
+        e.stopPropagation();
         this.pieShop.forEach(pie => {
             return pie.clear();
         });

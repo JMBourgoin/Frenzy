@@ -491,6 +491,7 @@ function () {
     key: "handleClick",
     value: function handleClick(e) {
       e.preventDefault();
+      e.stopPropagation();
       this.score.addFive();
       this.score.deactivateFive();
     }
@@ -637,6 +638,7 @@ function () {
     value: function handleClick(e) {
       e.preventDefault();
       this.score.rewindTime();
+      e.stopPropagation();
       this.score.deactivateHourglass();
     }
   }, {
@@ -901,6 +903,7 @@ function () {
     key: "handleClick",
     value: function handleClick(e, timer) {
       e.preventDefault();
+      e.stopPropagation();
       this.pieShop.forEach(function (pie) {
         return pie.clear();
       });

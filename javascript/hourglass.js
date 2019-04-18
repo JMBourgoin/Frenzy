@@ -17,6 +17,7 @@ class Hourglass {
     handleClick(e){
         e.preventDefault();
         this.score.rewindTime();
+        e.stopPropagation();
         this.score.deactivateHourglass();
     }
 
