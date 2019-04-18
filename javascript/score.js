@@ -104,6 +104,7 @@ class Score {
         this.levelCount = 0;
         this.sandsTime = 0;
         this.fiveScore = 0;
+        this.radioActiveCount = 0;
     }
 
     gameOver(){
