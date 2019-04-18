@@ -37,6 +37,7 @@ class Score {
     }
 
     rewindTime(){
+        if(this.level >= 7)
         this.level -= 5;
     }
 

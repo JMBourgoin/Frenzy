@@ -688,9 +688,9 @@ function () {
     this.colors = [];
     this.wedges = [];
     this.center = center;
-    this.score = score;
-    this.fade = 1;
-    this.fader = true;
+    this.score = score; // this.fade = 1;
+    // this.fader = true;
+
     this.render = this.render.bind(this);
     this.wedgePos = {
       0: {
@@ -993,7 +993,7 @@ function () {
   }, {
     key: "rewindTime",
     value: function rewindTime() {
-      this.level -= 5;
+      if (this.level >= 7) this.level -= 5;
     }
   }, {
     key: "addLife",

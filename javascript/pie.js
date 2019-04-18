@@ -7,8 +7,8 @@ class Pie {
         this.wedges = [];
         this.center = center;
         this.score = score;
-        this.fade = 1;
-        this.fader = true;
+        // this.fade = 1;
+        // this.fader = true;
         this.render = this.render.bind(this);
         this.wedgePos = {
             0: {xv: this.x - 40, yv: this.y - 74},
