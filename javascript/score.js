@@ -100,7 +100,10 @@ class Score {
         this.score = 0;
         this.lives = 6;
         this.level = 1;
+        this.totalLevels = 0;
         this.levelCount = 0;
+        this.sandsTime = 0;
+        this.fiveScore = 0;
     }
 
     gameOver(){
