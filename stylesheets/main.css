@@ -34,11 +34,17 @@ a {
 }
 
 /* CSS RESET -----------------------------------------------------------------------------------*/
+#bg {
+    background-image: url('../app/assets/images/bg.png');
+    height: 100vh;
+}
 
 #root {
     background-image: url('../app/assets/images/frenzy-board.svg');
     background-repeat: no-repeat;
     background-position: center;
+    background-color: transparent;
+    
 }
 
 canvas {
