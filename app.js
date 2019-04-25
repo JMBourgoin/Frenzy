@@ -42,7 +42,7 @@ window.addEventListener('click', function(e) {
     } else if (gameOver.className === "game-over-modal" && x > 360 && x < 396 && y > 439 && y < 479) {
           gameOver.className = "hide";
           game.board.sounds.pauseAll();
-
+          game.board.score.resetScores();
     } else if (x > 114 && x < 257 && y > 203 && y < 352){
         console.log('click6');
         game.board.handleClick(e, leftTopPie);

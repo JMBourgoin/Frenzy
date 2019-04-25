@@ -18,6 +18,7 @@
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "babel-loader": "^8.0.5",
+    "firebase": "^5.10.0",
     "install": "^0.12.2",
     "jquery": "^3.4.0",
     "npm": "^6.9.0"

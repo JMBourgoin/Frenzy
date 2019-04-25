@@ -1,3 +1,4 @@
+import 'firebase/database';
 class Score {
     constructor(){
         this.score = 0;
@@ -8,15 +9,42 @@ class Score {
         this.radioactive = false;
         this.five = false;
         this.hourglass = false;
-        this.yourScore = 0;
-        this.highScore = 0;
         this.sandsTime = 0;
         this.fiveScore = 0;
         this.radioActiveCount = 0;
-
+        this.yourScore = 0;
+        this.highs = [];
+        this.names = [];
+        this.database = firebase.database().ref('scores/');
         this.addPoints = this.addPoints.bind(this);
         this.takeLife = this.takeLife.bind(this);
         this.deactivateRadioactive = this.deactivateRadioactive.bind(this);
+        this.setScore = this.setScore.bind(this);
+        this.getScores = this.getScores.bind(this);
+        this.resetScores = this.resetScores.bind(this);
+    }
+
+    setScore(score, name){
+       let scoreRef = this.database.child(score);
+       scoreRef.set({
+           name,
+       });
+    }
+
+    getScores(){
+        let ref = this.database.orderByKey();
+        let score = '';
+        ref.on("value", snapshot =>{
+            score = snapshot.val();
+        })
+        this.highs = Object.keys(score).sort((a, b)=>{return b - a});
+        Object.values(score).forEach(score => {
+            this.names.unshift(score.name);   
+        })
+    }
+    resetScores(){
+        this.highs = [];
+        this.names = [];
     }
 
     isRadioactive(){
@@ -94,9 +122,13 @@ class Score {
 
     newGame(){
         this.yourScore = this.score;
-        if(this.yourScore > this.highScore){
-            this.highScore = this.yourScore;
+        if(this.score > this.highs[2]){
+            let name = window.prompt("You got a highscore!  Congrats!  Enter your initials:");
+            this.setScore(this.score, name);
         }
+
+        this.getScores();
+    
         this.score = 0;
         this.lives = 6;
         this.level = 1;

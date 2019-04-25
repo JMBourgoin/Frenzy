@@ -9,7 +9,6 @@ import RadioActive from './radioactive';
 import Five from './five';
 import Hourglass from './hourglass';
 
-
 class Board {
     constructor(stop){
         this.stop = stop;
@@ -19,6 +18,7 @@ class Board {
         this.sounds.createSounds();
         this.center = new Center(388, 386, this.wedges);
         this.score = new Score();
+        this.score.getScores();
         this.timer = new Timer(this.center, this.score, this.sounds);
         this.topPie = new Pie(388, 175, this.center, this.score);
         this.bottomPie = new Pie(388, 608, this.center, this.score);
@@ -61,10 +61,22 @@ class Board {
         this.score.deactivateHourglass();
     }
 
+    handleScores($selector){
+        $selector.empty();
+        const scores = this.score.highs;
+        const names = this.score.names;
+        scores.forEach((score, index) => {
+            if(index <= 2){
+                let ele = `<li>${names[index]} . . . ${score}</li>`;
+                return $selector.append(ele);
+            }
+        })
+    }
 
     render(){
         this.timer.draw();
         this.score.render();
+        this.score.getScores();
         this.topPie.render();
         this.bottomPie.render(); 
         this.center.render(); 
@@ -84,7 +96,7 @@ class Board {
             const $yourScore = $("#yourScore");
             const $highScore = $("#highScore");
             $yourScore.html(this.score.yourScore);
-            $highScore.html(this.score.highScore);
+            this.handleScores($highScore);
         }
 
     }
