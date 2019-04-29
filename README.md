@@ -28,10 +28,10 @@ alive in order to do so.  CAUTION:  This is a game of skill, not chance.  Your r
 how long you'll last - not the God of Wedges.<br><br>
 
 ## SCREENSHOTS
-![Screenshots](screenshot)<br><br>
+![Screenshots](gitimages/screenshot)<br><br>
 ### bonus tokens
-![Radioactive](radioactive.png) Radioactivity bonus: Clears the board entirely. <br>
-![5x](5x.png) 5x bonus: Adds 5 extra lives.<br>
-![Hourglass](hourglass.png) Sands of Time bonus: Slows the timer to pre-panic levels.<br><br>
+![Radioactive](./gitimages/radioactive.png) Radioactivity bonus: Clears the board entirely. <br>
+![5x](./gitimages/5x.png) 5x bonus: Adds 5 extra lives.<br>
+![Hourglass](./gitimages/hourglass.png) Sands of Time bonus: Slows the timer to pre-panic levels.<br><br>
 
 
