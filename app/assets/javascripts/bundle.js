@@ -164,10 +164,13 @@ window.addEventListener('click', function (e) {
   } else if (x > 113 && x < 164 && y > 144 && y < 194) {
     console.log('help');
     game.board.sounds.playPieWedge();
+    game.board.gameOver();
+    game.stop();
     game.toggleHelp();
-  } else if (x > 0 && x < 185 && y > 41 && y < 56) {
+  } else if (x > 0 && x < 200 && y > 41 && y < 56) {
     console.log('closehelp');
     game.toggleHelp();
+    game.start();
   } else if (x > 107 && x < 164 && y > 364 && y < 417) {
     console.log('radioactive');
 
