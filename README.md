@@ -28,7 +28,7 @@ alive in order to do so.  CAUTION:  This is a game of skill, not chance.  Your r
 how long you'll last - not the God of Wedges.<br><br>
 
 ## SCREENSHOTS
-![Screenshots](gitimages/screenshot)<br><br>
+![Screenshots](./gitimages/screenshot.png)<br><br>
 ### bonus tokens
 ![Radioactive](./gitimages/radioactive.png) Radioactivity bonus: Clears the board entirely. <br>
 ![5x](./gitimages/5x.png) 5x bonus: Adds 5 extra lives.<br>
