@@ -9,7 +9,9 @@ Iconfactory's Frenzic is a high pressure puzzle game that pits you, the user, ag
 • HTML5 / Canvas<br>
 • Webpack<br>
 • Babel<br>
+• Google Firebase (Database for highscore)<br>
 • Adobe Illustrator<br><br>
+
 
 ## GAME PLAY INSTRUCTIONS
 Can you handle the frenzied pace and put the pieces together?!  Frenzy is a fast paced game of 
